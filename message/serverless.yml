@@ -2,6 +2,13 @@ service: realtimechat
 
 provider:
     name: aws
+    ecr:
+    images:
+      appimage:
+        path: ./
+    logs:
+    websocket:
+      level: ERROR
     runtime: nodejs14.x
     profile: serverlessUser
     region: us-east-1
@@ -32,8 +39,6 @@ custom:
         migrate: true
     serverless-offline:
         host: 0.0.0.0
-        babelOptions:
-            presets: ["es2015", "stage-2"]
 
 functions:
     websocket-connect:
@@ -56,6 +61,7 @@ functions:
         events:
             - websocket:
                   route: message
+
 
 resources:
     Resources:

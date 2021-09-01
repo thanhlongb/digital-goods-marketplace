@@ -1,13 +1,14 @@
-FROM node:6-alpine
+FROM public.ecr.aws/lambda/nodejs:14
 
-WORKDIR /chat
+ARG FUNCTION_DIR="/var/task"
 
-COPY package.json package.json
+RUN mkdir -p ${FUNCTION_DIR}
 
-RUN npm install && npm install -g serverless
-COPY serverless.yml  ./
 
-RUN npm run install:dynamodb
-VOLUME /chat/
+COPY package.json ${FUNCTION_DIR}
 
-CMD ["npm", "run", "start"]
+RUN npm install
+COPY . .
+
+EXPOSE 8000
+ENTRYPOINT npx serverless offline

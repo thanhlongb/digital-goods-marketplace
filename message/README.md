@@ -26,7 +26,9 @@ This service uses the following AWS services:
 
 Note: if you are running to profile error when running `serverless deploy`, please refer to this article for some help: <https://www.serverless.com/framework/docs/providers/aws/cli-reference/config-credentials/>
 
-4. After deployed, you should see the wss:// link in endpoint section. Copy it for the next step
+4. After deployed, you should see the wss:// link in endpoint section. Copy it for the next step.
+
+Note: Before going to next step, make sure to trigger 4 lambda functions inside DynamoDB stream with batch size = 1 for development
 
 5. Run `wscat -c ${PASTE HERE}`. For instance, `wscat -c  wss://1tno267nkc.execute-api.us-east-1.amazonaws.com/dev`
 
@@ -54,7 +56,9 @@ Note: if you are running to profile error when running `serverless deploy`, plea
 
 ## Docker container setup
 
-1. For the docker , build the image first by running this command `docker build -t chat .`
+1. For the docker , build the image first by running this command `docker build . -t chatservice`
+
+2. To run the container, run the following command `docker run`
 
 ## For Postman
 
