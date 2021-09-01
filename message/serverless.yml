@@ -10,11 +10,30 @@ provider:
     iamRoleStatements:
         - Effect: Allow
           Action:
+           - "execute-api:ManageConnections"
+          Resource:
+            - "arn:aws:execute-api:*:*:**/@connections/*"
+        - Effect: Allow
+          Action:
               - dynamodb:*
           Resource: '*'
 
+    websocketApiRouteSelectionExpression: $request.body.action
+
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
 custom:
     tableName: WebsocketUsers
+    dynamodb:
+      start:
+        migrate: true
+    serverless-offline:
+        host: 0.0.0.0
+        babelOptions:
+            presets: ["es2015", "stage-2"]
 
 functions:
     websocket-connect:
@@ -51,3 +70,7 @@ resources:
                     - AttributeName: ID
                       KeyType: HASH
                 BillingMode: PAY_PER_REQUEST
+                SSESpecification:
+                   SSEEnabled: True
+                StreamSpecification:
+                   StreamViewType: NEW_IMAGE

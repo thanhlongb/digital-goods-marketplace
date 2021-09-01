@@ -1,11 +1,13 @@
-# syntax=docker/dockerfile:1
-FROM node:14.17.3
-ENV NODE_ENV=production
+FROM node:6-alpine
 
-WORKDIR /app
+WORKDIR /chat
 
-COPY ["package.json", "package-lock.json*", "./"]
+COPY package.json package.json
 
-RUN npm install --production
+RUN npm install && npm install -g serverless
+COPY serverless.yml  ./
 
-COPY . .
+RUN npm run install:dynamodb
+VOLUME /chat/
+
+CMD ["npm", "run", "start"]
