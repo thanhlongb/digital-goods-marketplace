@@ -58,7 +58,9 @@ Note: Before going to next step, make sure to trigger 4 lambda functions inside 
 
 1. For the docker , build the image first by running this command `docker build . -t chatservice`
 
-2. To run the container, run the following command `docker run`
+2. To run the container, run the following command `docker run chatservice`
+
+Note: You can also pull the docker image which I already deployed to ECR by this command `docker pull 920509648361.dkr.ecr.us-east-1.amazonaws.com/chatservice:latest`
 
 ## For Postman
 
