@@ -65,12 +65,13 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
             
             { user ? (
                 <div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-                  <button type="button"
-                    className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
-                    <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />                    
-                    <span>Add Product</span>
-                  </button>
-
+                  <Link href="/product/create">
+                    <a
+                      className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
+                      <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />                    
+                      <span>Add Product</span>
+                    </a>
+                  </Link>
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-4 relative z-10">
                     {({ open }) => (

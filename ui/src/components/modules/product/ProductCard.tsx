@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from 'next/link';
 import { API_BASE_URL } from "../../../utils/constants";
+import Image from 'next/image';
 const { DateTime } = require("luxon");
 
 type ProductCardProps = {
@@ -43,7 +44,12 @@ export const ProductCard = ({
           <Link href={`/product/${id}`}>
           <a>
           <div className="flex-shrink-0 relative">
-            <img className="h-56 w-full object-cover" src={imageUrl} alt="" />
+            <Image className="h-56 w-full object-cover" 
+                    src={imageUrl ?? "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"} 
+                    alt={name}
+                    loader={() => "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
+                    height={300}
+                    width={500}></Image>
             <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900 group-hover:to-gray-800"></div>
             <div className="flex-1 absolute bottom-0 left-0 right-0 pb-4 px-4">
               <p className="text-sm font-medium text-white bg-blue-500 inline-block px-3 py-1 rounded-full">
@@ -67,7 +73,7 @@ export const ProductCard = ({
                 <a>
                   <img className="h-10 w-10 rounded-full" 
                        src={seller.imageUrl} 
-                       alt={seller.name} />
+                       alt={seller.name}></img>
                 </a>
                 </Link>
               </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CalendarIcon, ChatAlt2Icon, ChevronRightIcon, ShoppingBagIcon, StarIcon } from '@heroicons/react/outline'
 import Link from 'next/link';
+import Image from 'next/image';
 const { DateTime } = require("luxon");
 
 type ProductHeaderSectionProps = {
@@ -48,10 +49,15 @@ const ProductHeaderSection = ({
     </nav>
 
     <div className="pt-4 lg:grid lg:grid-cols-12 lg:gap-x-5">
-      <div className="lg:col-span-7">
-        <img className="h-full max-h-96 w-full object-cover rounded-md shadow-md"
-        src={product.imageUrl}
-        alt={product.name} />    
+      <div className="lg:col-span-7 relative">
+        <img 
+          className="h-full max-h-96 w-full object-cover rounded-md shadow-md"
+          src={product.image_path}
+          alt={product.name}
+          // loader={() => "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
+          // width="100%"
+          // height="400"
+        />    
       </div>
       <div className="space-y-4 px-0 lg:col-span-5">
         <h2 className="mt-4 lg:mt-0 text-4xl tracking-7 font-extrabold text-white sm:text-3xl">
@@ -61,7 +67,7 @@ const ProductHeaderSection = ({
         <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
           <div className="flex items-center text-sm text-gray-500">
             <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-            { DateTime.fromSeconds(product.date).toLocaleString(DateTime.DATE_MED) }
+            { DateTime.fromSeconds(product.published).toLocaleString(DateTime.DATE_MED) }
           </div>
           <div className="flex items-center text-sm text-gray-500">
             <StarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />

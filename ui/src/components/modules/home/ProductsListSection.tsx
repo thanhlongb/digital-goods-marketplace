@@ -42,8 +42,8 @@ export const ProductsListSection = ({
                   id={product.id} 
                   name={product.name} 
                   price={product.price} 
-                  date={product.date} 
-                  imageUrl={product.imageUrl} 
+                  date={product.published} 
+                  imageUrl={product.image_path} 
                   sellerId={product.seller} 
                   categoryId={product.category} 
                   />

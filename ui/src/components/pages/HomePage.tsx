@@ -6,7 +6,7 @@ import { CallToActionSection } from '../modules/home/CallToActionSection';
 import { TopSellersSection } from '../modules/home/TopSellersSection';
 import { CallToActionBusinessSection } from '../modules/home/CallToActionBusinessSection';
 import { DefaultLayout } from '../layouts/DefaultLayout';
-import { API_BASE_URL } from '../../utils/constants';
+import { API_BASE_URL, API_PRODUCT_SERVICE } from '../../utils/constants';
 
 interface HomePageProps {
   categories?: any[],
@@ -53,38 +53,15 @@ HomePage.getInitialProps = async ({ req }) => {
 }
 
 const fetchRecentProducts = async () => {
- return fetch(`http://${API_BASE_URL}/getRecentProducts`)
+ return fetch(`https://${API_PRODUCT_SERVICE}/products/recent?limit=6`)
           .then(response => response.json())
-          .catch(error => {console.log(error); return []});
-  
-  // const recentProductsParsed = recentProducts.map(async (product:any) => {
-  //   // TODO: fix this stupid code blocking =)) 
-  //   fetch(`http://${API_BASE_URL}/users/${product.seller}`)
-  //     .then(response => response.json())
-  //     .then(seller => product.seller = seller);
-  //   fetch(`http://${API_BASE_URL}/categories/${product.category}`)
-  //     .then(response => response.json())
-  //     .then(category => product.category = category);
-    
-  //   return product;
-  // });
-  // return Promise.all(recentProducts);
+          .catch(error => { console.log(error); return [] });
 }
 
 const fetchTopSellers = async () => {
-  return fetch(`http://${API_BASE_URL}/getTopSellers`)
+  return fetch(`https://${API_PRODUCT_SERVICE}/products/topseller?limit=6`)
           .then(response => response.json())
           .catch(error => {console.log(error); return []});
-  
-  // const topSellersParsed = topSellers.map(async (seller:any) => {
-  //   // TODO: fix this stupid code blocking =)) 
-  //   fetch(`http://${API_BASE_URL}/getUserAvatar`)
-  //     .then(response => response.json())
-  //     .then(avatar => seller.imageUrl = avatar.imageUrl)
-  //   // seller.imageUrl = imageUrl.imageUrl;
-  //   return seller;
-  // });
-  // return Promise.all(topSellers);
 }
 
 export default HomePage

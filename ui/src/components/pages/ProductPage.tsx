@@ -6,7 +6,7 @@ import ProductDetailsSection from '../modules/product/ProductDetailsSection';
 import ProductReviewsSection from '../modules/product/ProductReviewsSection';
 import { ProductSidebar } from '../modules/product/ProductSidebar';
 import { useState } from 'react';
-import { API_BASE_URL } from '../../utils/constants';
+import { API_BASE_URL, API_PRODUCT_SERVICE } from '../../utils/constants';
 
 interface ProductPageProps {
     product?: any,
@@ -51,7 +51,7 @@ const ProductPage : NextPage<ProductPageProps> = ({
 ProductPage.getInitialProps = async ({ query }) => {
     const { id } = query;
     // TODO: Probably retarded
-    const product = await fetch(`http://${API_BASE_URL}/getProduct`).then(response => response.json());
+    const product = await fetch(`https://${API_PRODUCT_SERVICE}/products/${id}`).then(response => response.json());
     const seller = await fetch(`http://${API_BASE_URL}/getUser`).then(response => response.json());
     const reviews = await fetch(`http://${API_BASE_URL}/reviews?product=${id}`).then(response => response.json());
 

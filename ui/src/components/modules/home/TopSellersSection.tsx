@@ -3,7 +3,6 @@ import { NextPage } from "next";
 import { SellerCard } from "./SellerCard";
 import { Alert } from '../../elements/Alert';
 
-// TODO: load async top sellers
 interface TopSellersSectionProps {
     sellers: any[]
 }
@@ -26,7 +25,10 @@ export const TopSellersSection : NextPage<TopSellersSectionProps> = ({
                             <ul className="space-y-2 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:gap-x-8">
 
                             {sellers.map((seller) => (
-                                <SellerCard key={seller.name} seller={seller} />
+                                <SellerCard 
+                                    key={seller.seller} 
+                                    name={seller.seller}
+                                    sales={seller.sales} />
                             ))}  
                             
                             </ul>

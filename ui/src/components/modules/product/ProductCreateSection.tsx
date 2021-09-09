@@ -1,38 +1,49 @@
 import React, { useState } from "react";
 import { CloudUploadIcon, PhotographIcon } from '@heroicons/react/outline';
-import Image from 'next/image';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { API_PRODUCT_UPLOAD_SERVICE } from "../../../utils/constants";
 
-type ProductCreateSectionProps = {
 
+const requestS3SignedUrl = async (fileType: string) => {
+  return axios.get(`https://${API_PRODUCT_UPLOAD_SERVICE}/uploads`, {
+    params: {
+      fileType: fileType
+    },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "*/*"
+    }
+  })
+  .then(response => response.data)
+  .catch(error => console.log(error))
 }
- 
 
-const ProductCreateSection = ({
-
-} : ProductCreateSectionProps) => {
-  const [files, setFiles] = useState(Object());
-  const [imageCoverUrl, setImageCoverUrl] = useState("");
-  const fetchS3SignedUrl = async () => (
-    fetch("https://g75sn645ai.execute-api.ap-southeast-1.amazonaws.com/uploads")
-      .then(response => response.json())
-      .catch(error => console.log(error))
-  )
-  const uploadImageToS3 = () => {
-      // fetch(signedUrl.uploadURL)
-      //   .then(response => {
-      //     if (response.status == 200) console.log("uploaded");
-      //   })
-      //   .catch(error => console.log(error));
+const uploadImageToS3 = async (signedUrl:string, image: any) => {
+  if (signedUrl && image) {
+    return axios.put(signedUrl, image)
+            // .then(response => console.log(response))  
+            .catch(error => console.log(error)) 
   }
-    
-  
+}
+
+const ProductCreateSection = () => {
+  const [imageCoverUrl, setImageCoverUrl] = useState("");
+   
   const handleUploadCoverImage = (e: any) => {
     if (e.target.files) {
-      setImageCoverUrl(URL.createObjectURL(e.target.files[0]));
-    } else {
-      setImageCoverUrl("");
-    }
+      const imageFile = e.target.files[0];
+      const imageType = imageFile.name.split(".")[1];
+      requestS3SignedUrl(imageType).then(response => {
+          const imageGeneratedName = response.file;
+          uploadImageToS3(response.uploadURL, imageFile)
+            .then((response:any) => {
+              if (response.status == 200)
+                setImageCoverUrl(`http://d49dx19uklgyt.cloudfront.net/${imageGeneratedName}`)
+            })
+        })
+        .catch(error => console.log(error));
+      setImageCoverUrl(URL.createObjectURL(imageFile));
+    } 
   }    
 
     return (
@@ -47,7 +58,6 @@ const ProductCreateSection = ({
                 Basic information
               </h1>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                { JSON.stringify(files) }
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               </p>
             </div>
