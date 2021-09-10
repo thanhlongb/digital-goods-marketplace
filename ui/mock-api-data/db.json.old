@@ -1,0 +1,409 @@
+{
+    "categories": [
+        { 
+            "id": 1, 
+            "name": "Videos" 
+        },
+        { 
+            "id": 2, 
+            "name": "Audios" 
+        },
+        { 
+            "id": 3, 
+            "name": "Images" 
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+            "details": "Hello World!",
+            "price": 100,
+            "date": 1630085700,
+            "rating": 4.5,
+            "reviews": 123,
+            "imageUrl": "https://images.unsplash.com/photo-1613182454978-e59ca9ab3adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "seller": 1,
+            "category": 1
+        },
+        {
+            "id": 2,
+            "name": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
+            "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+            "details": "Hello World!",
+            "price": 100,
+            "date": 1630085700,
+            "rating": 4.5,
+            "reviews": 123,
+            "href": "",
+            "imageUrl": "https://images.unsplash.com/photo-1616622264797-c95545dd8df7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
+            "seller": 2,
+            "category": 2
+        },
+        {
+            "id": 3,
+            "name": "Quia consequuntur magni",
+            "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+            "details": "Hello World!",
+            "price": 100,
+            "date": 1630085700,
+            "rating": 4.5,
+            "reviews": 123,
+            "href": "",
+            "imageUrl": "https://images.unsplash.com/photo-1622363254057-1887180b58e5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1033&q=80",
+            "seller": 1,
+            "category": 3
+        },
+        {
+            "id": 4,
+            "name": "Quis nostrum exercitationem ullam corporis suscipit",
+            "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+            "details": "Hello World!",
+            "price": 100,
+            "date": 1630085700,
+            "rating": 4.5,
+            "reviews": 123,
+            "href": "",
+            "imageUrl": "https://images.unsplash.com/photo-1539724728401-4337be9859ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80",
+            "seller": 3,
+            "category": 1
+        },
+        {
+            "id": 5,
+            "name": "Vel illum qui dolorem eum fugiat quo voluptas nulla pariatur",
+            "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+            "details": "Hello World!",
+            "price": 100,
+            "date": 1630085700,
+            "rating": 4.5,
+            "reviews": 123,
+            "href": "",
+            "imageUrl": "https://images.unsplash.com/photo-1565060105783-fc1366524661?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+            "seller": 4,
+            "category": 2
+        },
+        {
+            "id": 6,
+            "name": "Non numquam eius modi tempora incidunt ut labore ",
+            "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+            "details": "Hello World!",
+            "price": 100,
+            "date": 1630085700,
+            "rating": 4.5,
+            "reviews": 123,
+            "href": "",
+            "imageUrl": "https://images.unsplash.com/photo-1613182454978-e59ca9ab3adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "seller": 1,
+            "category": 1
+        }
+    ],
+    "purchases": [
+        {
+            "id": 1,
+            "product": 1,
+            "buyer": 1,
+            "date": 1630085700
+        },
+        {
+            "id": 2,
+            "product": 2,
+            "buyer": 1,
+            "date": 1630085700
+        },
+        {
+            "id": 3,
+            "product": 1,
+            "buyer": 2,
+            "date": 1630085700
+        },
+        {
+            "id": 4,
+            "product": 3,
+            "buyer": 1,
+            "date": 1630085700
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "name": "Leslie Alexander",
+            "email": "leslie@example.com",
+            "imageUrl":
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        },
+        {
+            "id": 2,
+            "name": "Tom Cook",
+            "email": "tom@example.com",
+            "imageUrl":
+              "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        },
+        {
+            "id": 3,
+            "name": "Christopher Campbell",
+            "email": "chris@example.com",
+            "imageUrl":
+              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        },
+        {
+            "id": 4,
+            "name": "Joseph Gonzalez",
+            "email": "jose@example.com",
+            "imageUrl":
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        }
+    ],
+    "reviews": [
+        {
+            "id": 1,
+            "rating": 4,
+            "content": "Ducimus quas delectus ad maxime totam doloribus reiciendis ex.",
+            "product": 1,
+            "reviewer": 1
+        },
+        {
+            "id": 2,
+            "rating": 3,
+            "content": "Similique voluptatibus tempore non ut.",
+            "product": 1,
+            "reviewer": 2
+        },
+        {
+            "id": 3,
+            "rating": 5,
+            "product": 2,
+            "content": "Tempore dolorem maiores. Similique voluptatibus tempore non ut.",
+            "reviewer": 4
+        }
+    ],
+
+    "getAllCategories": [
+        { 
+            "id": 1, 
+            "name": "Videos" 
+        },
+        { 
+            "id": 2, 
+            "name": "Audios" 
+        },
+        { 
+            "id": 3, 
+            "name": "Images" 
+        }
+    ],
+
+    "getCategory": { 
+        "id": 1, 
+        "name": "Videos" 
+    },
+
+    "getTag": { 
+        "id": 1, 
+        "name": "Tag name" 
+    },
+    
+    "getUser": {
+        "name": "lesliealexander",
+        "email": "leslie@example.com",
+        "imageUrl":
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+
+    "getUserAvatar": {
+        "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    
+    "getProduct": {
+        "id": 1,
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "details": "# Maris copia baculo feres\n\n## Deductus Hector effetum amantes\n\nLorem markdownum volucrem **petis**, in fluunt fidensque infelix honori! Non est\nCipe ad villo tutela quamvis si noluit tantos Cadmeida aerane virgineum populos\nemicat. Rogum magni; texerat pallentemque facit ire sic vini quo est ingrediens\nat et donec secundo? Revocata cantu, in amatum moratos Hebrum noctisque interea.\n\n1. Ampyciden funera ambobus\n2. Manu corona te ferrum suppressa strepitus cumque\n3. Annos adferre capit\n4. Remissis ligno\n5. Vota rerum praestantior\n\n## Cui undis spectabat morte laborum placebant habet\n\nTuo exaudi fortunaeque ire quod ingenua et dummodo Ossae? Cum pedem petentes,\n*sentit undis tardaque* quamvis *quid*, per quoque dixerat mortem demisso nati\naethera proboque. Querno sacrarunt observo remansit **voce** in vulnere debent\niugo: silvis. Mihi quoque nunc decor datae Aenea\n[crimine](http:\/\/www.in-et.org\/), Ampycides sed quid tollensque amaris!\n\n## Cedite in putares nocte coniuge Hesperio praecorrupta\n\nQuondam a circumspice, Odrysius subit Aiaci tergo, in, et ferre, posset *mea*\ncernere lympha, **explorat**. Nupta tamen taurum tiaris si at illo dolore noctis\nvirga Amphimedon manu mihi dedit, mihi.\n\n1. Facta haec\n2. Herbis violenta\n3. Iuno meque non ultimus populusque rediit vestrum\n4. Et insidias spes\n5. Pugnae forent voluisti nitidum arva\n\n## Elin nido tenet salici mortale\n\nDespectare confertur. Est casus iuris carus Cytherea dominum, male Iovis soror,\nlateri Te iuvenesque norat resedit peragunt.\n\n    noc = open_hyperlink;\n    recursiveLaser = system_megabit + 686214 * hypertext + ripping_smart +\n            point;\n    if (2 != -3 + netmaskParse) {\n        cutPointUpload -= 3;\n        pppoe.standbyIcsPetaflops += 26 + wavelength_bash * versionPrinterCtr;\n    } else {\n        lion = so_screenshot * gigabyte(lifo, ibm, mailSurfaceFile);\n        processorTunnelingDesktop(input_file, onLinkType);\n    }\n    proxy += pipelineNetwork;\n    rate_filename_unmount(800403 + zip_editor_mainframe(veronicaDelete,\n            http_drop_petabyte, 20), drive_parity + 815306);\n\nPer ecce fletumque. Pennis potiuntur carpere Nixosque et quercus erat viridem,\ndissipat, ait. Ter qua missa priores!",
+        "price": 100,
+        "date": 1630085700,
+        "rating": 4.5,
+        "reviews": 123,
+        "imageUrl": "https://images.unsplash.com/photo-1613182454978-e59ca9ab3adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+        "seller": "josephgonzalez",
+        "category": 1
+    },
+
+    "getRecentProducts": [
+        {
+            "id": 1,
+            "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1613182454978-e59ca9ab3adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1]
+        },
+        {
+            "id": 2,
+            "name": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1616622264797-c95545dd8df7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1]        
+        },
+        {
+            "id": 3,
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1622363254057-1887180b58e5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1033&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1]
+        }
+    ],
+
+    "getReviewsOfProduct": [
+        {
+            "id": 1,
+            "rating": 4,
+            "content": "Ducimus quas delectus ad maxime totam doloribus reiciendis ex.",
+            "product": 1,
+            "reviewer": "josephgonzalez",
+            "date": 1630085700
+        },
+        {
+            "id": 2,
+            "rating": 3,
+            "content": "Similique voluptatibus tempore non ut.",
+            "product": 1,
+            "reviewer": "josephgonzalez",
+            "date": 1630085700
+        },
+        {
+            "id": 3,
+            "rating": 5,
+            "product": 2,
+            "content": "Tempore dolorem maiores. Similique voluptatibus tempore non ut.",
+            "reviewer": "christophercampbell",
+            "date": 1630085700
+        }
+    ],
+
+    "getSellingProducts": [
+        {
+            "id": 1,
+            "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1613182454978-e59ca9ab3adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "seller": "josephgonzalez",
+            "category": 2,
+            "tags": [2]        
+        },
+        {
+            "id": 2,
+            "name": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1616622264797-c95545dd8df7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1]
+        },
+        {
+            "id": 3,
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1622363254057-1887180b58e5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1033&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1]
+        }
+    ],
+
+    "getBoughtProducts": [
+        {
+            "id": 1,
+            "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1613182454978-e59ca9ab3adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1]
+        },
+        {
+            "id": 2,
+            "name": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1616622264797-c95545dd8df7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1]
+        },
+        {
+            "id": 3,
+            "price": 100,
+            "date": 1630085700,
+            "imageUrl": "https://images.unsplash.com/photo-1622363254057-1887180b58e5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1033&q=80",
+            "seller": "josephgonzalez",
+            "category": 1,
+            "tags": [1,2]
+        }
+    ],
+
+    "getSearchResults": {
+        "totalResults": 231,
+        "products": [
+            {
+                "id": 1,
+                "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                "price": 100,
+                "date": 1630085700,
+                "imageUrl": "https://images.unsplash.com/photo-1613182454978-e59ca9ab3adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+                "seller": "josephgonzalez",
+                "category": 1,
+                "tags": [1]
+            },
+            {
+                "id": 2,
+                "name": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
+                "price": 100,
+                "date": 1630085700,
+                "imageUrl": "https://images.unsplash.com/photo-1616622264797-c95545dd8df7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
+                "seller": "josephgonzalez",
+                "category": 1,
+                "tags": [1]
+            },
+            {
+                "id": 3,
+                "price": 100,
+                "date": 1630085700,
+                "imageUrl": "https://images.unsplash.com/photo-1622363254057-1887180b58e5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1033&q=80",
+                "seller": "josephgonzalez",
+                "category": 1,
+                "tags": [1]
+            }    
+        ]
+    },
+
+    "getTopSellers": [
+        {
+            "name": "lesliealexander",
+            "sales": 100
+        },
+        {
+            "name": "tomcook",
+            "sales": 80
+        },
+        {
+            "name": "christophercampbell",
+            "sales": 55
+        },
+        {
+            "name": "josephgonzalez",
+            "sales": 14
+        }
+    ]    
+    
+
+}
