@@ -35,7 +35,7 @@ Note: Before going to next step, make sure to trigger 4 lambda functions inside 
 6. After connected, type in this format:
 
 ```bash
-{"action": "message", "message", "whatever to chat here"}
+{"action": "message", "message": "whatever to chat here"}
 ```
 
 7. Go to DynamoDB database, then go to WebsocketUsers table to see the message in messages column
