@@ -9,9 +9,8 @@ app.use(cors());
 // Routes
 const emailRouter = require("./api/routes/sendEmailRoute.js");
 
-
-// example API call: localhost:8080/api/sendEmail?email="paulluanvothanh@gmail.com"
-app.use("/api/sendEmail", emailRouter);
+// example API call: localhost:8080/api/sendEmail?email=paulluanvothanh@gmail.com
+app.use("/api", emailRouter);
 
 const PORT = 8080;
 app.listen(PORT, () => console.log("Services running on port 8080"));

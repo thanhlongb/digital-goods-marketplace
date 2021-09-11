@@ -6,12 +6,6 @@ var AWS = require("aws-sdk");
 // Set the region
 AWS.config.update({ region: "us-east-1" });
 
-// "From" address
-SENDER = "paulkevintornado@gmail.com";
-
-// "To" address
-RECIPIENT = "paulluanvothanh@gmail.com";
-
 // The subject line for the email.
 SUBJECT = "Confirm awaiting order";
 
@@ -144,7 +138,12 @@ BODY_HTML = `<!DOCTYPE html>
 // Text body template
 BODY_TEXT = "TEST";
 
-router.get("/", function (req, res) {
+router.get("/sendEmail", async (req, res) => {
+  // "From" address
+  SENDER = "paulkevintornado@gmail.com";
+
+  // "To" address
+  RECIPIENT = req.query.email;
   // Create sendEmail params
   var params = {
     Destination: {
