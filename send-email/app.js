@@ -1,8 +1,14 @@
 const express = require("express");
-const router = express.Router();
+const cors = require("cors");
+
+// Initialize app
+const app = express();
+app.use(express.json());
+app.use(cors());
+
 
 // Load the AWS SDK for Node.js
-var AWS = require("aws-sdk");
+const AWS = require("aws-sdk");
 // Set the region
 AWS.config.update({ region: "us-east-1" });
 
@@ -138,7 +144,7 @@ BODY_HTML = `<!DOCTYPE html>
 // Text body template
 BODY_TEXT = "TEST";
 
-router.get("/sendEmail", async (req, res) => {
+app.post("/", async (req, res) => {
   // "From" address
   SENDER = "paulkevintornado@gmail.com";
 
@@ -184,4 +190,4 @@ router.get("/sendEmail", async (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = app;

@@ -1,16 +1,8 @@
-const express = require("express");
-const cors = require("cors");
+'use strict';
 
-// Initialize app
-const app = express();
-app.use(express.json());
-app.use(cors());
+const awsServerlessExpress = require('aws-serverless-express')
 
-// Routes
-const emailRouter = require("./api/routes/sendEmailRoute.js");
+const app = require('./app')
+const server = awsServerlessExpress.createServer(app)
+exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context);
 
-// example API call: localhost:8080/api/sendEmail?email=paulluanvothanh@gmail.com
-app.use("/api", emailRouter);
-
-const PORT = 8080;
-app.listen(PORT, () => console.log("Services running on port 8080"));
