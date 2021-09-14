@@ -4,7 +4,7 @@ import { ProductCard } from "../product/ProductCard";
 import { Pagination } from "./Pagination";
 import { Alert } from '../../../components/elements/Alert';
 import { SearchSectionContext, sortByOptions } from '../../pages/SearchPage';
-import { API_BASE_URL } from "../../../utils/constants";
+import { API_BASE_URL, API_PRODUCT_SERVICE } from "../../../utils/constants";
 
 type SearchResultsSectionProps = {
   setIsSearching: Dispatch<SetStateAction<boolean>>,
@@ -26,7 +26,7 @@ export const SearchResultsSection = ({
   const fetchProducts = async () => {
     const queryParams = new URLSearchParams();
     if (searchContext.searchQuery) 
-      queryParams.append("searchQuery", searchContext.searchQuery);
+      queryParams.append("query", searchContext.searchQuery);
     if (searchContext.priceFrom > 0)
       queryParams.append("priceFrom", searchContext.priceFrom.toString());
     if (searchContext.priceTo > 0)
@@ -35,8 +35,10 @@ export const SearchResultsSection = ({
       queryParams.append("filterCategories", searchContext.filterCategories.join(','))
     if (searchContext.orderBy)
       queryParams.append("orderBy", searchContext.orderBy)
+    if (searchContext.pageNumber)
+      queryParams.append("pageNumber", searchContext.pageNumber.toString())
 
-    fetch(`http://${API_BASE_URL}/getSearchResults?${queryParams.toString()}`)
+    fetch(`https://${API_PRODUCT_SERVICE}/products/search?${queryParams.toString()}`)
       .then(response => response.json())
       .then(response => {
         setProducts(response.products); 
@@ -88,8 +90,8 @@ export const SearchResultsSection = ({
                   id={product.id} 
                   name={product.name} 
                   price={product.price} 
-                  date={product.date} 
-                  imageUrl={product.imageUrl} 
+                  date={product.published} 
+                  imageUrl={product.image_path} 
                   sellerId={product.seller} 
                   categoryId={product.category} 
                   />

@@ -5,7 +5,7 @@ import { ProductSectionContext } from "../../pages/ProductPage";
 
 // TODO: check for product ownership, considering allow edit in this page
 interface ProductSidebarProps {
-    
+    isOwner: boolean
 }
 
 function classNames(...classes:any) {
@@ -13,9 +13,8 @@ function classNames(...classes:any) {
 }
 
 export const ProductSidebar : NextPage<ProductSidebarProps> = ({
-    
+    isOwner
 }) => {
-
     const { currentSection, setCurrentSection } = useContext(ProductSectionContext);
 
     return (
@@ -42,6 +41,17 @@ export const ProductSidebar : NextPage<ProductSidebarProps> = ({
                 Reviews
               </span>
             </button>
+            { isOwner ? (
+              <button onClick={() => { setCurrentSection("purchases") }} 
+                      className={classNames(
+                        (currentSection == 'purchases') ? 'bg-indigo-400 text-white' : 'text-gray-600 hover:bg-gray-200 hover:text-gray-900',
+                        "w-full flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                      )}>
+                <span className="truncate">
+                  Purchases
+                </span>
+              </button>            
+            ) : null }
           {/* <a className="text-gray-600 hover:bg-gray-200 hover:text-gray-900 flex items-center px-3 py-2 text-sm font-medium rounded-md">
             <span className="">
               Changelog

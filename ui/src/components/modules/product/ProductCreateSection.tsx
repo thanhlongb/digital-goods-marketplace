@@ -1,56 +1,128 @@
-import React, { useState } from "react";
-import { CloudUploadIcon, PhotographIcon } from '@heroicons/react/outline';
-import axios, { AxiosResponse } from 'axios';
-import { API_PRODUCT_UPLOAD_SERVICE } from "../../../utils/constants";
+import React, { useRef, useState } from "react";
+import { CloudUploadIcon, PhotographIcon, XIcon } from '@heroicons/react/outline';
+import axios from 'axios';
+import { API_PRODUCT_CDN, API_PRODUCT_SERVICE, API_PRODUCT_UPLOAD_SERVICE } from "../../../utils/constants";
+import { useSession } from 'next-auth/client';
+import { ExclamationIcon } from '@heroicons/react/solid'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 
-const requestS3SignedUrl = async (fileType: string) => {
-  return axios.get(`https://${API_PRODUCT_UPLOAD_SERVICE}/uploads`, {
+const uploadFile = async (file: any, dir: string) => {
+  const fileType = file.name.split(".").at(-1);
+  return await requestS3SignedUrl(fileType, dir).then(signedUrl => {
+      return uploadFileToS3(signedUrl.uploadURL, file)
+        .then((response:any) => (signedUrl.file))
+        .catch(error => console.log(error))
+    .catch(error => console.log(error));
+  }) 
+}    
+
+const requestS3SignedUrl = async (fileType: string, dir: string) => {
+  return axios.get(`https://${API_PRODUCT_UPLOAD_SERVICE}/upload`, {
     params: {
+      dir: dir,
       fileType: fileType
-    },
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Accept": "*/*"
     }
   })
   .then(response => response.data)
   .catch(error => console.log(error))
 }
 
-const uploadImageToS3 = async (signedUrl:string, image: any) => {
-  if (signedUrl && image) {
-    return axios.put(signedUrl, image)
+const uploadFileToS3 = async (signedUrl:string, file: any) => {
+  if (signedUrl && file) {
+    return axios.put(signedUrl, file)
             // .then(response => console.log(response))  
             .catch(error => console.log(error)) 
   }
 }
 
-const ProductCreateSection = () => {
-  const [imageCoverUrl, setImageCoverUrl] = useState("");
-   
+type ProductCreateSectionProps = {
+  categories: any[]
+}
+
+const ProductCreateSection = ({
+  categories = []
+} : ProductCreateSectionProps) => {
+  const defaultProduct = {
+    name: "",
+    price: 0,
+    category: 0,
+    tags: "",
+    description: "",
+    details: "",
+    image_path: "",
+    file_path: ""
+  }
+  const router = useRouter();
+  const [product, setProduct] = useState(defaultProduct);
+  const [imageUploading, setImageUploading] = useState(false);
+  const [fileUploading, setFileUploading] = useState(false);
+
+  const form = useRef(null);
+  const [session, loading] = useSession();
+  const user = (session ? session.user : null);
+
   const handleUploadCoverImage = (e: any) => {
     if (e.target.files) {
-      const imageFile = e.target.files[0];
-      const imageType = imageFile.name.split(".")[1];
-      requestS3SignedUrl(imageType).then(response => {
-          const imageGeneratedName = response.file;
-          uploadImageToS3(response.uploadURL, imageFile)
-            .then((response:any) => {
-              if (response.status == 200)
-                setImageCoverUrl(`http://d49dx19uklgyt.cloudfront.net/${imageGeneratedName}`)
-            })
-        })
-        .catch(error => console.log(error));
-      setImageCoverUrl(URL.createObjectURL(imageFile));
-    } 
-  }    
+      const file = e.target.files[0];
+      setImageUploading(true);
+      uploadFile(file, "thumbnail")
+        .then((uploadFileName: any) => {
+          setProduct({
+            ...product, 
+            image_path: `https://${API_PRODUCT_CDN}/${uploadFileName}`
+          });
+          setImageUploading(false);
+        });
+      setProduct({
+        ...product, 
+        image_path: URL.createObjectURL(file)
+      });  
+    }
+  } 
+
+  const handleUploadProductFile = (e: any) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      setFileUploading(true);
+      uploadFile(file, "products")
+        .then((uploadFileName: any) => {
+          setProduct({
+            ...product, 
+            file_path: `https://${API_PRODUCT_CDN}/${uploadFileName}`
+          });
+          setFileUploading(false);
+        });
+    }
+  }  
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+
+    fetch(`https://${API_PRODUCT_SERVICE}/products`, {
+      method: 'POST',
+      body: JSON.stringify({
+        ...product, 
+        seller: user?.name ?? "",
+        published: Math.floor(Date.now()/1000)
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => res.json())
+      .then(product => {     
+        router.push(`/product/${product.id}`);
+      })
+      .catch(error => console.log(error));
+  }  
 
     return (
+// TODO: Redirect to home if user not logged in
 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:py-16 lg:px-8">
-  <div className="bg-white rounded-lg shadow overflow-hidden">
+
+    <div className="bg-white rounded-lg shadow overflow-hidden">
     <div className="divide-y divide-gray-200">
-      <form className="space-y-8 divide-y p-8 lg-16 divide-gray-200">
+      <form ref={form} onSubmit={handleFormSubmit} className="space-y-8 divide-y p-8 lg-16 divide-gray-200">
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div>
             <div>
@@ -70,9 +142,11 @@ const ProductCreateSection = () => {
                   <div className="max-w-lg flex rounded-md shadow-sm">
                     <input
                       type="text"
-                      name="name"
+                      name="product[name]"
                       id="name"
                       autoComplete="name"
+                      onChange={e => setProduct({ ...product, name: e.target.value })}
+                      defaultValue={product.name}
                       className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded sm:text-sm border-gray-300"
                       />
                   </div>
@@ -86,9 +160,11 @@ const ProductCreateSection = () => {
                   <div className="max-w-lg flex rounded-md shadow-sm">
                     <input
                       type="number"
-                      name="price"
+                      name="product[price]"
                       id="price"
                       autoComplete="price"
+                      onChange={e => setProduct({ ...product, price: Number.parseInt(e.target.value) ?? 0 })}
+                      defaultValue={product.price}
                       className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded sm:text-sm border-gray-300"
                       />
                   </div>
@@ -102,13 +178,17 @@ const ProductCreateSection = () => {
                   <div className="max-w-lg flex rounded-md shadow-sm">
                     <select
                       id="category"
-                      name="category"
+                      name="product[category]"
                       autoComplete="category"
+                      onChange={e => setProduct({ ...product, category: Number.parseInt(e.target.value) })}
                       className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       >
-                      <option>Images</option>
-                      <option>Videos</option>
-                      <option>Audios</option>
+                      { categories.map((category: any) => 
+                        <option key={category.id}
+                                value={category.id}>
+                          {category.name}
+                        </option>
+                      ) }
                     </select>
                   </div>
                 </div>
@@ -121,40 +201,44 @@ const ProductCreateSection = () => {
                   <div className="max-w-lg flex rounded-md shadow-sm">
                     <input
                       type="text"
-                      name="tags"
+                      name="product[tags]"
                       id="tags"
                       autoComplete="tags"
+                      onChange={e => setProduct({ ...product, tags: e.target.value })}
+                      defaultValue={product.tags}
                       className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded sm:text-sm border-gray-300"
                       />
                   </div>
                 </div>
               </div>
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label htmlFor="overview" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                Overview
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                Description
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <textarea
-                    id="overview"
-                    name="overview"
+                    id="description"
+                    name="product[description]"
                     rows={3}
+                    onChange={e => setProduct({ ...product, description: e.target.value })}
+                    defaultValue={product.description}
                     className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
-                    defaultValue={''}
                     />
                   <p className="mt-2 text-sm text-gray-500">Write a few sentences about your product.</p>
                 </div>
               </div>
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label htmlFor="overview" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                Description
+                <label htmlFor="details" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                Details
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <textarea
-                    id="overview"
-                    name="overview"
+                    id="details"
+                    name="product[details]"
                     rows={5}
+                    onChange={e => setProduct({ ...product, details: e.target.value })}
+                    defaultValue={product.details}
                     className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
-                    defaultValue={''}
                     />
                   <p className="mt-2 text-sm text-gray-500">Write detailed description of your product.</p>
                 </div>
@@ -173,11 +257,11 @@ const ProductCreateSection = () => {
               Cover photo
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
-                { (imageCoverUrl) ? (
+                { (product.image_path) ? (
                   <>
-                    <img className="max-h-96" src={imageCoverUrl}></img>
+                    <img className="max-h-96" src={product.image_path}></img>
                     <button className="my-4 px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            onClick={() => setImageCoverUrl("")}>
+                            onClick={() => setProduct({ ...product, image_path: "" })}>
                               Choose another one
                     </button>
                   </>             
@@ -211,14 +295,33 @@ const ProductCreateSection = () => {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                   <div className="space-y-1 text-center">
-                    <CloudUploadIcon className="mx-auto h-12 w-12 text-gray-400" />
+                    <CloudUploadIcon 
+                      className={`${(product.file_path.length > 0) ? "text-green-500" : "text-gray-400"} mx-auto h-12 w-12`} />
                     <div className="text-sm text-gray-600">
+                    { (product.file_path.length > 0) ? (
+                      <>
+                      <Link href={product.file_path}>
+                        <label className="text-green-500 hover:text-green-600 cursor-pointer relative bg-white rounded-md font-medium">
+                            <span>
+                              {product.file_path.split('/').at(-1)}  
+                            </span>
+                        </label>
+                      </Link>
+                      </>  
+                    ) : (
                       <label
                         htmlFor="file-upload"
-                        className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                        className={`${fileUploading ? 'text-gray-400' : 'text-indigo-600 hover:text-indigo-500'} relative cursor-pointer bg-white rounded-md font-medium focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500`}>
+                      <span>{ fileUploading ? "Uploading file..." : "Upload a file" }</span>
+                      <input id="file-upload" 
+                            name="file-upload" 
+                            type="file" 
+                            className="sr-only"
+                            accept=".zip"
+                            disabled={fileUploading}
+                            onChange={(e) => handleUploadProductFile(e)} />
                       </label>
+                    ) }
                     </div>
                     <p className="text-xs text-gray-500">ZIP up to 100MB</p>
                   </div>
@@ -229,15 +332,17 @@ const ProductCreateSection = () => {
         </div>
         <div className="pt-5">
           <div className="flex justify-end">
+            <Link href="/">
+              <a
+                className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+              Cancel
+              </a>
+            </Link>
             <button
-              type="button"
-              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-            Cancel
-            </button>
-            <button
+              disabled={fileUploading || imageUploading}
               type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className={`${ (fileUploading || imageUploading) ? "bg-indigo-400" : "bg-indigo-600 hover:bg-indigo-700" } ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               >
             Submit
             </button>
@@ -246,6 +351,8 @@ const ProductCreateSection = () => {
       </form>
     </div>
   </div>
+
+
 </div>
 
 )}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
-import { API_BASE_URL } from "../../../utils/constants";
+import { API_USER_SERVICE } from "../../../utils/constants";
 
 interface SellerCardProps {
     name: string,
@@ -13,9 +13,9 @@ export const SellerCard = ({
 } : SellerCardProps) => {
     const [avatar, setAvatar] = useState('');
     useEffect(() => {
-      fetch(`http://${API_BASE_URL}/getUserAvatar`)
+      fetch(`https://${API_USER_SERVICE}/v1/users/${name}`)
         .then(response => response.json())
-        .then(avatar => setAvatar(avatar.imageUrl))
+        .then(avatar => setAvatar(avatar.avatar))
     })
     return (
     <li>

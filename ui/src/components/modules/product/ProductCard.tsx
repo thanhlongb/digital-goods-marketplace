@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from 'next/link';
-import { API_BASE_URL } from "../../../utils/constants";
+import { API_PRODUCT_SERVICE, API_USER_SERVICE } from "../../../utils/constants";
 import Image from 'next/image';
 const { DateTime } = require("luxon");
 
@@ -26,14 +26,15 @@ export const ProductCard = ({
   const [seller, setSeller] = useState({'name': 'undefined', 'imageUrl': '#'});
   const [category, setCategory] = useState({'name': 'undefined'});
   const fetchSeller = async (id: string) => {
-    fetch(`http://${API_BASE_URL}/getUser`)
+    fetch(`https://${API_USER_SERVICE}/v1/users/${sellerId}`)
       .then(response => response.json())
       .then(fetchedSeller => setSeller(fetchedSeller));
   }
   const fetchCategory = async (id: string) => {
-    fetch(`http://${API_BASE_URL}/categories/${id}`)
+    fetch(`https://${API_PRODUCT_SERVICE}/categories/${categoryId}`)
       .then(response => response.json())
-      .then(fetchedCategory => setCategory(fetchedCategory));
+      .then(fetchedCategory => setCategory(fetchedCategory))
+      .catch(error => console.log(error));
   }  
   useEffect(() => {
     if (sellerId) fetchSeller(sellerId);
@@ -44,12 +45,11 @@ export const ProductCard = ({
           <Link href={`/product/${id}`}>
           <a>
           <div className="flex-shrink-0 relative">
-            <Image className="h-56 w-full object-cover" 
+            <img className="h-56 w-full object-cover" 
                     src={imageUrl ?? "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"} 
                     alt={name}
-                    loader={() => "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
-                    height={300}
-                    width={500}></Image>
+                    // loader={() => "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
+            ></img>
             <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900 group-hover:to-gray-800"></div>
             <div className="flex-1 absolute bottom-0 left-0 right-0 pb-4 px-4">
               <p className="text-sm font-medium text-white bg-blue-500 inline-block px-3 py-1 rounded-full">

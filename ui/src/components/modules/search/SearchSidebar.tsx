@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NextPage } from "next";
 import { CheckboxFilter } from "./CheckboxFilter";
 import { PriceRangeFilter } from "./PriceRangeFilter";
-import { API_BASE_URL } from "../../../utils/constants";
+import { API_BASE_URL, API_PRODUCT_SERVICE } from "../../../utils/constants";
 
 interface SearchSidebarProps {
     triggerSearch: any,
@@ -21,7 +21,7 @@ export const SearchSidebar = ({
 } : SearchSidebarProps) => {
     const [categories, setCategories] = useState(Array());    
     const fetchCategories = async () => {
-        fetch(`http://${API_BASE_URL}/categories`)
+        fetch(`https://${API_PRODUCT_SERVICE}/categories`)
             .then(response => response.json())
             .then(fetchedCategories => setCategories(fetchedCategories));
     }

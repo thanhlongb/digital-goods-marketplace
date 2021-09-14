@@ -1,21 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { CalendarIcon, ChatAlt2Icon, ChevronRightIcon, ShoppingBagIcon, StarIcon } from '@heroicons/react/outline'
+import { CalendarIcon, ChatAlt2Icon, ChevronRightIcon, ShoppingBagIcon, StarIcon, CloudDownloadIcon } from '@heroicons/react/outline'
 import Link from 'next/link';
-import Image from 'next/image';
+import { API_PRODUCT_SERVICE } from "../../../utils/constants";
+import { useSession } from 'next-auth/client';
+import axios from "axios";
 const { DateTime } = require("luxon");
 
 type ProductHeaderSectionProps = {
     product: any,
-    seller: any
+    seller: any,
+    isOwner: boolean 
 }
 
 const ProductHeaderSection = ({
   product,
-  seller
+  seller,
+  isOwner
 } : ProductHeaderSectionProps) => {
-  
-// TODO: fetch category name
+  const [session, loading] = useSession();
+  const user = (session ? session.user : null);
+  const [purchase, setPurchase] = useState<null | any>(null);
+  const fetchPurchase = async () => {
+    fetch(`https://${API_PRODUCT_SERVICE}/purchases?product=${product.id}&buyer=${user?.name}`)
+      .then(response => response.json())
+      .then((purchase:any) => {
+        if (Object.keys(purchase).length > 0) {
+          setPurchase(purchase);
+        }
+      })
+      .catch(error => console.log(error));
+  }
+  const handlePurchase = () => {
+    axios.post(`https://${API_PRODUCT_SERVICE}/purchases`, {
+      productId: product.id,
+      buyer: user?.name      
+    }).then(response => {
+      setPurchase(response.data)
+    })
+      .catch(error => console.log(error));
+  }
 
+  useEffect(() => {
+    if (user && purchase === null) fetchPurchase();
+  }, [])
+// TODO: fetch category name
   return (
 
 <div className="bg-gray-900">
@@ -41,7 +69,7 @@ const ProductHeaderSection = ({
           <div className="flex items-center">
             <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
             <Link href={`/product?categories=${product.category}`}>
-              <a className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-300">Images</a>
+              <a className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-300">{product.category}</a>
             </Link>
           </div>
         </li>
@@ -86,22 +114,32 @@ const ProductHeaderSection = ({
               ${product.price}
             </div>
           </div>
-          <Link href={`/user/${seller.name}`}>
-            <a className="group inline-block">
-              <div className="flex p-1 rounded-full bg-gray-800 group-hover:bg-gray-700 items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                <div className="flex-shrink-0">
-                  <img className="inline-block h-9 w-9 rounded-full" 
-                      src={seller.imageUrl} 
-                      alt={seller.name} />
+          { seller ? (
+            <Link href={`/user/${seller.name}`}>
+              <a className="group inline-block">
+                <div className="flex p-1 rounded-full bg-gray-800 group-hover:bg-gray-700 items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                  <div className="flex-shrink-0">
+                    <img className="inline-block h-9 w-9 rounded-full" 
+                        src={seller.imageUrl} 
+                        alt={seller.name} />
+                  </div>
+                  <div className="ml-3 mr-4 overflow-hidden">
+                    <p className="text-sm font-medium text-white truncate">
+                      {seller.name}
+                    </p>
+                  </div>
                 </div>
-                <div className="ml-3 mr-4 overflow-hidden">
-                  <p className="text-sm font-medium text-white truncate">
-                    {seller.name}
-                  </p>
-                </div>
+              </a>
+            </Link>
+          ) : (
+            <div className="flex p-1 rounded-full bg-gray-800 group-hover:bg-gray-700 items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+              <div className="ml-3 mr-4 overflow-hidden">
+                <p className="text-sm font-medium text-white truncate">
+                  Unable to load seller
+                </p>
               </div>
-            </a>
-          </Link>
+            </div>            
+          ) }
         </div>
 
         <div>
@@ -109,17 +147,34 @@ const ProductHeaderSection = ({
             {product.description}
           </p>
         </div>
-        
+        { !isOwner ? (
         <div className="flex space-x-4">
-          <span className="sm:block">
-            <button type="button" className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <span className="sm:block">
+          { purchase ? (
+             purchase.confirmed ? (
+              <Link href={product.file_path}>
+                <a target="_blank"
+                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                <CloudDownloadIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                Download
+                </a>
+              </Link>              
+             ) : (
+                <div className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                Waiting Approval
+                </div>
+             ) 
+          ) : (
+            <button type="button"
+                    onClick={() => handlePurchase()} 
+                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <ShoppingBagIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
               Purchase
-            </button>
-          </span>
-        </div>
-
-
+            </button>              
+          ) }
+        </span>
+      </div>          
+        ) : null }
       </div>
     </div>
   </div>

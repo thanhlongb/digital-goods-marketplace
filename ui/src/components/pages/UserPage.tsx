@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import { DefaultLayout } from "../layouts/DefaultLayout";
 import { UserHeaderSection } from '../modules/user/UserHeaderSection';
 import { ProductsListSection } from "../modules/home/ProductsListSection";
-import { API_BASE_URL } from "../../utils/constants";
+import { API_BASE_URL, API_PRODUCT_SERVICE, API_USER_SERVICE } from "../../utils/constants";
 import { Alert } from "../elements/Alert";
 
 interface UserPageProps {
@@ -22,7 +22,7 @@ const UserPage : NextPage<UserPageProps> = ({
             { user ? (
                 <>
                     <UserHeaderSection 
-                        avatar={user.imageUrl}
+                        avatar={user.avatar}
                         username={user.name}
                         email={user.email} />
                     <ProductsListSection 
@@ -47,13 +47,19 @@ const UserPage : NextPage<UserPageProps> = ({
 
 UserPage.getInitialProps = async ({ query }) => {
     const { id } = query;
-    const user            = await (await fetch(`http://${API_BASE_URL}/getUser`)).json();
-    const sellingProducts = user ? (await (await fetch(`http://${API_BASE_URL}/getSellingProducts`)).json()) : [];
-    const boughtProducts  = user ? (await (await fetch(`http://${API_BASE_URL}/getBoughtProducts`)).json()) : [];
+    // TODO the awaits below is autistic, fix it
+    const user            = await fetch(`https://${API_USER_SERVICE}/v1/users/${id}`)
+        .then(response => response.json())
+        .catch(error => null);
+    const sellingProducts = user ? (
+        await fetch(`https://${API_PRODUCT_SERVICE}/products/selling?user=${id}`)
+            .then(response => response.json())
+        ) : [];
+    // const boughtProducts  = user ? (await (await fetch(`https://${API_PRODUCT_SERVICE}/purchases?buyer=${id}`)).json()) : [];
     
     return {
       sellingProducts: sellingProducts,
-      boughtProducts: boughtProducts,
+      boughtProducts: [],
       user: user,
     }
 }

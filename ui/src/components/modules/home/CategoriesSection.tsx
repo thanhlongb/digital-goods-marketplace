@@ -20,7 +20,7 @@ export const CategoriesSection : NextPage<CategoriesSectionProps> = ({
             </div>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 pt-8">
                 {categories.map((category) => (
-                  <Link key={category.name} href={`/product?categories=${category.id}`}>
+                  <Link key={category.id} href={`/product?categories=${category.id}`}>
                     <a className="relative justify-center rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:ring-2 focus-within:ring-2 focus-within:ring-blue-500">
                        <span className="text-xl font-bold">{category.name}</span>
                     </a>

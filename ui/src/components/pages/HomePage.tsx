@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { NextPage } from 'next'
 import { HeroSection } from '../modules/home/HeroSection';
 import { CategoriesSection } from '../modules/home/CategoriesSection';
 import { ProductsListSection } from '../modules/home/ProductsListSection';
@@ -6,7 +6,7 @@ import { CallToActionSection } from '../modules/home/CallToActionSection';
 import { TopSellersSection } from '../modules/home/TopSellersSection';
 import { CallToActionBusinessSection } from '../modules/home/CallToActionBusinessSection';
 import { DefaultLayout } from '../layouts/DefaultLayout';
-import { API_BASE_URL, API_PRODUCT_SERVICE } from '../../utils/constants';
+import { API_PRODUCT_SERVICE } from '../../utils/constants';
 
 interface HomePageProps {
   categories?: any[],
@@ -42,7 +42,7 @@ const HomePage: NextPage<HomePageProps> = ({
 HomePage.getInitialProps = async ({ req }) => {
   // TODO: fix this stupid code blocking =)) 
   const recentProducts = await fetchRecentProducts();
-  const categories = await fetch(`http://${API_BASE_URL}/categories`).then(response => response.json());
+  const categories = await fetch(`https://${API_PRODUCT_SERVICE}/categories`).then(response => response.json());
   const topSellers = await fetchTopSellers();
   
   return {
