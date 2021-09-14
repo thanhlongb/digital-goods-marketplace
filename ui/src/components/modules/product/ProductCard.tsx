@@ -23,21 +23,22 @@ export const ProductCard = ({
   sellerId, 
   categoryId,
 } : ProductCardProps) => {
-  const [seller, setSeller] = useState({'name': 'undefined', 'imageUrl': '#'});
+  const [avatar, setAvatar] = useState<null | string>(null);
   const [category, setCategory] = useState({'name': 'undefined'});
-  const fetchSeller = async (id: string) => {
-    fetch(`https://${API_USER_SERVICE}/v1/users/${sellerId}`)
+  const fetchSellerAvatar = async (id: string) => {
+    fetch(`https://${API_USER_SERVICE}/v1/users/${id}`)
       .then(response => response.json())
-      .then(fetchedSeller => setSeller(fetchedSeller));
+      .then(fetchedSeller => setAvatar(fetchedSeller.avatar))
+      .catch(error => console.log(error));
   }
   const fetchCategory = async (id: string) => {
-    fetch(`https://${API_PRODUCT_SERVICE}/categories/${categoryId}`)
+    fetch(`https://${API_PRODUCT_SERVICE}/categories/${id}`)
       .then(response => response.json())
       .then(fetchedCategory => setCategory(fetchedCategory))
       .catch(error => console.log(error));
   }  
   useEffect(() => {
-    if (sellerId) fetchSeller(sellerId);
+    if (sellerId) fetchSellerAvatar(sellerId);
     if (categoryId) fetchCategory(categoryId);
   }, [])
     return (
@@ -69,19 +70,19 @@ export const ProductCard = ({
           <div className="flex-1 bg-gray-900 group-hover:bg-gray-800 p-4 flex flex-col justify-between">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <Link href={`/user/${seller.name}`}>
+                <Link href={`/user/${sellerId}`}>
                 <a>
                   <img className="h-10 w-10 rounded-full" 
-                       src={seller.imageUrl} 
-                       alt={seller.name}></img>
+                       src={avatar ?? "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"} 
+                       alt={sellerId}></img>
                 </a>
                 </Link>
               </div>
               <div className="flex-1 ml-3">
                 <p className="text-sm font-medium text-white">
-                  <Link href={`/user/${seller.name}`}>
+                  <Link href={`/user/${sellerId}`}>
                   <a className="hover:underline">
-                    {seller.name}
+                    {sellerId}
                   </a>
                   </Link>
                 </p>

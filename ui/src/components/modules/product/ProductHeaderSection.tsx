@@ -9,12 +9,14 @@ const { DateTime } = require("luxon");
 type ProductHeaderSectionProps = {
     product: any,
     seller: any,
+    avatar: any,
     isOwner: boolean 
 }
 
 const ProductHeaderSection = ({
   product,
   seller,
+  avatar,
   isOwner
 } : ProductHeaderSectionProps) => {
   const [session, loading] = useSession();
@@ -114,32 +116,24 @@ const ProductHeaderSection = ({
               ${product.price}
             </div>
           </div>
-          { seller ? (
-            <Link href={`/user/${seller.name}`}>
+
+            <Link href={`/user/${seller}`}>
               <a className="group inline-block">
                 <div className="flex p-1 rounded-full bg-gray-800 group-hover:bg-gray-700 items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                   <div className="flex-shrink-0">
                     <img className="inline-block h-9 w-9 rounded-full" 
-                        src={seller.imageUrl} 
-                        alt={seller.name} />
+                        src={avatar} 
+                        alt={seller} />
                   </div>
                   <div className="ml-3 mr-4 overflow-hidden">
                     <p className="text-sm font-medium text-white truncate">
-                      {seller.name}
+                      {seller}
                     </p>
                   </div>
                 </div>
               </a>
             </Link>
-          ) : (
-            <div className="flex p-1 rounded-full bg-gray-800 group-hover:bg-gray-700 items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-              <div className="ml-3 mr-4 overflow-hidden">
-                <p className="text-sm font-medium text-white truncate">
-                  Unable to load seller
-                </p>
-              </div>
-            </div>            
-          ) }
+
         </div>
 
         <div>

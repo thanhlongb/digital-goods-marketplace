@@ -1,6 +1,4 @@
 import React from "react";
-import { StarIcon } from '@heroicons/react/solid'
-const { DateTime } = require("luxon");
 import Link from "next/link";
 import { RatingView } from "react-simple-star-rating";
 

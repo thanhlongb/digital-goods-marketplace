@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 interface ProductPageProps {
     product?: any,
-    seller?: any,
+    avatar?: any,
     reviews?: any[],
     purchases?: any[]
 }
@@ -27,7 +27,7 @@ export const ProductSectionContext = createContext(
 
 const ProductPage : NextPage<ProductPageProps> = ({
     product,
-    seller,
+    avatar,
     reviews,
     purchases
 }) => {
@@ -40,7 +40,8 @@ const ProductPage : NextPage<ProductPageProps> = ({
                 <>
                 <ProductHeaderSection 
                     product={product}
-                    seller={seller} 
+                    seller={product.seller} 
+                    avatar={avatar}
                     isOwner={product.seller == user?.name} />
                 <ProductSectionContext.Provider value={{currentSection, setCurrentSection}}>
                     <div className="max-w-7xl mx-auto p-8 grid lg:grid-cols-12 lg:gap-x-5">
@@ -96,11 +97,9 @@ ProductPage.getInitialProps = async ({ query }) => {
     const product = await fetch(`https://${API_PRODUCT_SERVICE}/products/${id}`)
         .then(response => response.json())
         .catch(error => null);
-    const seller = await fetch(`https://${API_USER_SERVICE}/v1/users/${id}`)
-        .then(response => {
-            if (response.status == 200) response.json()
-            else null
-        })
+    const avatar = await fetch(`https://${API_USER_SERVICE}/v1/users/${product.seller}/avatar`)
+        .then(response => response.json())
+        .then(response => response.avatar)
         .catch(error => null);
     const reviews = await fetch(`https://${API_PRODUCT_SERVICE}/reviews?productid=${id}`)
         .then(response => response.json())
@@ -111,7 +110,7 @@ ProductPage.getInitialProps = async ({ query }) => {
 
     return {
         product: product,
-        seller: seller,
+        avatar: avatar,
         reviews: reviews,
         purchases: purchases
     }

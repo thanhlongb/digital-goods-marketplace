@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CloudUploadIcon, PhotographIcon, XIcon } from '@heroicons/react/outline';
 import axios from 'axios';
 import { API_PRODUCT_CDN, API_PRODUCT_SERVICE, API_PRODUCT_UPLOAD_SERVICE } from "../../../utils/constants";
@@ -6,36 +6,7 @@ import { useSession } from 'next-auth/client';
 import { ExclamationIcon } from '@heroicons/react/solid'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-
-const uploadFile = async (file: any, dir: string) => {
-  const fileType = file.name.split(".").at(-1);
-  return await requestS3SignedUrl(fileType, dir).then(signedUrl => {
-      return uploadFileToS3(signedUrl.uploadURL, file)
-        .then((response:any) => (signedUrl.file))
-        .catch(error => console.log(error))
-    .catch(error => console.log(error));
-  }) 
-}    
-
-const requestS3SignedUrl = async (fileType: string, dir: string) => {
-  return axios.get(`https://${API_PRODUCT_UPLOAD_SERVICE}/upload`, {
-    params: {
-      dir: dir,
-      fileType: fileType
-    }
-  })
-  .then(response => response.data)
-  .catch(error => console.log(error))
-}
-
-const uploadFileToS3 = async (signedUrl:string, file: any) => {
-  if (signedUrl && file) {
-    return axios.put(signedUrl, file)
-            // .then(response => console.log(response))  
-            .catch(error => console.log(error)) 
-  }
-}
+import { uploadFile, requestS3SignedUrl, uploadFileToS3 } from '../../../utils/fileUpload';
 
 type ProductCreateSectionProps = {
   categories: any[]
@@ -114,7 +85,12 @@ const ProductCreateSection = ({
         router.push(`/product/${product.id}`);
       })
       .catch(error => console.log(error));
-  }  
+  };
+
+  // This will cause error in the future, but time is running out, too bad!
+  useEffect(() => {
+    setProduct({ ...product, category: categories.length > 0 ? categories[0].id : 0 });
+  }, [])
 
     return (
 // TODO: Redirect to home if user not logged in
@@ -180,7 +156,7 @@ const ProductCreateSection = ({
                       id="category"
                       name="product[category]"
                       autoComplete="category"
-                      onChange={e => setProduct({ ...product, category: Number.parseInt(e.target.value) })}
+                      onChange={e => setProduct({ ...product, category: Number.parseInt(e.target.value)})}
                       className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       >
                       { categories.map((category: any) => 

@@ -23,7 +23,6 @@ export const ProductCreatePage : NextPage<ProductCreatePageProps> = ({
 ProductCreatePage.getInitialProps = async ({ req }) => {
     const fetchedCategories = await fetch(`https://${API_PRODUCT_SERVICE}/categories`)
         .then(response => response.json());
-
     return {
         categories: fetchedCategories
     }

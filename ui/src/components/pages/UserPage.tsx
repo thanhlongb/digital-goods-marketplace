@@ -3,8 +3,9 @@ import { NextPage } from "next";
 import { DefaultLayout } from "../layouts/DefaultLayout";
 import { UserHeaderSection } from '../modules/user/UserHeaderSection';
 import { ProductsListSection } from "../modules/home/ProductsListSection";
-import { API_BASE_URL, API_PRODUCT_SERVICE, API_USER_SERVICE } from "../../utils/constants";
+import { API_PRODUCT_SERVICE, API_USER_SERVICE } from "../../utils/constants";
 import { Alert } from "../elements/Alert";
+import { useSession } from 'next-auth/client';
 
 interface UserPageProps {
     user?: any,
@@ -17,6 +18,8 @@ const UserPage : NextPage<UserPageProps> = ({
     sellingProducts,
     boughtProducts
 }) => {
+    const [session, loading] = useSession();
+    const currentUser = (session ? session.user : null);    
     return (
         <DefaultLayout>
             { user ? (
@@ -24,7 +27,8 @@ const UserPage : NextPage<UserPageProps> = ({
                     <UserHeaderSection 
                         avatar={user.avatar}
                         username={user.name}
-                        email={user.email} />
+                        email={user.email}
+                        isCurrentUser={user.name == currentUser?.name} />
                     <ProductsListSection 
                         title="Selling products"
                         products={sellingProducts}
