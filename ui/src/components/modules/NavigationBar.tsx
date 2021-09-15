@@ -22,6 +22,7 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
   const router = useRouter();
   const [session, loading] = useSession();
   const user = (session ? session.user : null);
+  console.log(user)
   return (
 
 <Disclosure as="nav" className="bg-gray-900 py-6">
@@ -136,15 +137,6 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
                 </div>
             ) : (
                 <div className="hidden md:flex md:items-center md:space-x-6">
-                {/* TODO: change callbackurl */}
-                {/* <button type="submit" 
-                        disabled={loading}
-                        onClick={() => signIn('cognito', {
-                          callbackUrl: `${window.location.origin}`
-                        })}
-                        className="mr-4 text-base font-medium text-white hover:text-gray-300">
-                    Log in
-                </button> */}
                 <button type="submit"
                         disabled={loading}
                         onClick={() => signIn('cognito', {
@@ -207,10 +199,6 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
             ) : (
                 <div className="py-3 border-t border-gray-700">
                     <div className="space-y-2 lg:px-3">
-                        {/* <a href="#"
-                            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                            Sign up
-                        </a> */}
                         <button type="submit"
                                 disabled={loading}
                                 onClick={() => signIn('cognito', {

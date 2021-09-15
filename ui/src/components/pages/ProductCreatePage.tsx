@@ -4,6 +4,8 @@ import { DefaultLayout } from "../layouts/DefaultLayout";
 import ProductCreateSection from '../modules/product/ProductCreateSection';
 import ProductCreateHeaderSection from '../modules/product/ProductCreateHeaderSection';
 import { API_PRODUCT_SERVICE } from "../../utils/constants";
+import { useSession } from 'next-auth/client';
+import { Alert } from '../elements/Alert';
 
 interface ProductCreatePageProps {
     categories: any[]
@@ -12,10 +14,18 @@ interface ProductCreatePageProps {
 export const ProductCreatePage : NextPage<ProductCreatePageProps> = ({
     categories
 }) => {
+    const [session, loading] = useSession();
+    const user = (session ? session.user : null);
     return (
         <DefaultLayout>
-            <ProductCreateHeaderSection />
-            <ProductCreateSection categories={categories} />
+            { user ? (
+                <>
+                    <ProductCreateHeaderSection />
+                    <ProductCreateSection categories={categories} />
+                </>
+            ) : (
+                <Alert message="You need to log in to access this page." />
+            ) }
         </DefaultLayout>
     )
 }

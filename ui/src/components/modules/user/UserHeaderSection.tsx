@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
 import { uploadFile } from '../../../utils/fileUpload';
+import axios from 'axios';
+import { API_PRODUCT_CDN, API_USER_SERVICE } from '../../../utils/constants';
 /**
  * TODO: fix image hover bug where it only clickable
  *       when hovering on ourside circle of avatar
@@ -20,6 +22,7 @@ export const UserHeaderSection : NextPage<UserHeaderSectionProps> = ({
     email,
     isCurrentUser
 }) => {
+  const [userAvatar, setUserAvatar] = useState<undefined | string>(avatar);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const handleAvatarUpload = (e: any) => {
     if (e.target.files) {
@@ -27,16 +30,15 @@ export const UserHeaderSection : NextPage<UserHeaderSectionProps> = ({
       setAvatarUploading(true);
       uploadFile(file, "avatar")
         .then((uploadFileName: any) => {
-          // setProduct({
-          //   ...product, 
-          //   image_path: `https://${API_PRODUCT_CDN}/${uploadFileName}`
-          // });
-          // setImageUploading(false);
+          axios.patch(`https://${API_USER_SERVICE}/v1/users/${username}/avatar`, {
+            avatar: `https://${API_PRODUCT_CDN}/${uploadFileName}`
+          })
+          .then((response:any) => {
+              setAvatarUploading(false)
+              setUserAvatar(response.avatar ?? avatar)
+          })
+          .catch(error => console.log(error));
         });
-      // setProduct({
-      //   ...product, 
-      //   image_path: URL.createObjectURL(file)
-      // });  
     }
   }
     return (
@@ -47,7 +49,8 @@ export const UserHeaderSection : NextPage<UserHeaderSectionProps> = ({
               <div className="relative">
                 
                 <div className="relative rounded-full overflow-hidden">
-                    <img className="relative rounded-full w-20 h-20" src={avatar} alt="" />
+                    <img className={`${avatarUploading && "animate-pulse"} relative rounded-full w-20 h-20`} 
+                          src={userAvatar} alt={username} />
                     { isCurrentUser && (
                       <label
                           htmlFor="user-photo"

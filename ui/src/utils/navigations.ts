@@ -4,12 +4,8 @@ export const AppNavigation = [
         path: '/'
     },
     { 
-        name: 'Products', 
+        name: 'Search', 
         path: '/product' 
-    },
-    { 
-        name: 'Categories', 
-        path: '/product'
     },
   ]
   

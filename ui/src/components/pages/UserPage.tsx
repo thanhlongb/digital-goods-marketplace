@@ -9,8 +9,8 @@ import { useSession } from 'next-auth/client';
 
 interface UserPageProps {
     user?: any,
-    sellingProducts?: any,
-    boughtProducts?: any
+    sellingProducts: any[],
+    boughtProducts: any[]
 }
 
 const UserPage : NextPage<UserPageProps> = ({
@@ -59,11 +59,14 @@ UserPage.getInitialProps = async ({ query }) => {
         await fetch(`https://${API_PRODUCT_SERVICE}/products/selling?user=${id}`)
             .then(response => response.json())
         ) : [];
-    // const boughtProducts  = user ? (await (await fetch(`https://${API_PRODUCT_SERVICE}/purchases?buyer=${id}`)).json()) : [];
+    const boughtProducts = user ? (
+        await fetch(`https://${API_PRODUCT_SERVICE}/products/bought?user=${id}`)
+            .then(response => response.json())
+        ) : [];
     
     return {
       sellingProducts: sellingProducts,
-      boughtProducts: [],
+      boughtProducts: boughtProducts,
       user: user,
     }
 }

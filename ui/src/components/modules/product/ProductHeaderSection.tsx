@@ -21,6 +21,7 @@ const ProductHeaderSection = ({
 } : ProductHeaderSectionProps) => {
   const [session, loading] = useSession();
   const user = (session ? session.user : null);
+  const [category, setCategory] = useState<null | string>(null);
   const [purchase, setPurchase] = useState<null | any>(null);
   const fetchPurchase = async () => {
     fetch(`https://${API_PRODUCT_SERVICE}/purchases?product=${product.id}&buyer=${user?.name}`)
@@ -32,6 +33,12 @@ const ProductHeaderSection = ({
       })
       .catch(error => console.log(error));
   }
+  const fetchCategory = async (id: string) => {
+    fetch(`https://${API_PRODUCT_SERVICE}/categories/${id}`)
+      .then(response => response.json())
+      .then(fetchedCategory => setCategory(fetchedCategory.name))
+      .catch(error => console.log(error));
+  }    
   const handlePurchase = () => {
     axios.post(`https://${API_PRODUCT_SERVICE}/purchases`, {
       productId: product.id,
@@ -44,8 +51,10 @@ const ProductHeaderSection = ({
 
   useEffect(() => {
     if (user && purchase === null) fetchPurchase();
+  }, [user])
+  useEffect(() => {
+    fetchCategory(product.category);
   }, [])
-// TODO: fetch category name
   return (
 
 <div className="bg-gray-900">
@@ -67,14 +76,16 @@ const ProductHeaderSection = ({
             </Link>
           </div>
         </li>
-        <li>
-          <div className="flex items-center">
-            <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
-            <Link href={`/product?categories=${product.category}`}>
-              <a className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-300">{product.category}</a>
-            </Link>
-          </div>
-        </li>
+        { category && (
+          <li>
+            <div className="flex items-center">
+              <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
+              <Link href={`/product?categories=${product.category}`}>
+                <a className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-300">{category}</a>
+              </Link>
+            </div>
+          </li>
+        )}
       </ol>
     </nav>
 
@@ -101,11 +112,11 @@ const ProductHeaderSection = ({
           </div>
           <div className="flex items-center text-sm text-gray-500">
             <StarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-            {product.rating} stars
+            {Number(product.rating_avg).toFixed(1)} stars
           </div>
           <div className="flex items-center text-sm text-gray-500">
             <ChatAlt2Icon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-            {product.reviews} reviews
+            {product.review_count} reviews
           </div>
           
         </div>
@@ -155,7 +166,7 @@ const ProductHeaderSection = ({
               </Link>              
              ) : (
                 <div className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                Waiting Approval
+                Waiting confirm
                 </div>
              ) 
           ) : (
