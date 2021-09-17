@@ -145,7 +145,7 @@ BODY_TEXT = "TEST";
 
 app.use("/sendEmail", async (req, res) => {
   // "From" address
-  SENDER = "paulkevintornado@gmail.com";
+  SENDER = "digitalmarketplace.sales@gmail.com";
 
   // "To" address
   RECIPIENT = req.query.email;
