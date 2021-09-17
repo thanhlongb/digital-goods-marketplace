@@ -40,7 +40,6 @@ const HomePage: NextPage<HomePageProps> = ({
 }
 
 HomePage.getInitialProps = async ({ req }) => {
-  // TODO: fix this stupid code blocking =)) 
   const recentProducts = await fetchRecentProducts();
   const categories = await fetch(`https://${API_PRODUCT_SERVICE}/categories`).then(response => response.json());
   const topSellers = await fetchTopSellers();

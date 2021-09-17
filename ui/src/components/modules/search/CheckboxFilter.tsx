@@ -10,9 +10,6 @@ interface CheckboxFilterProps {
   triggerSearch: () => {};
 }
 
-// TODO: figure out how these things works
-// TODO: also, use for loops for each category
-
 export const CheckboxFilter : NextPage<CheckboxFilterProps> = ({
   options,
   addFilterCategory,

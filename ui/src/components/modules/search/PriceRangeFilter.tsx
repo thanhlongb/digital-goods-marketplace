@@ -39,7 +39,6 @@ export const PriceRangeFilter : NextPage<PriceRangeFilterProps> = ({
                      id="from" 
                      autoComplete="from"
                      className="flex-1 text-right px-2 block border w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
-                     // TODO: add searchContext priceTo here and below priceFrom
                      onChange={(e) => setPriceFrom(e.target.value)}
                      />
             </div>

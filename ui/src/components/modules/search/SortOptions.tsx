@@ -7,7 +7,6 @@ function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
-// TODO: this for overlayed by product cards, maybe dont use this?
 interface SortOptionsProps {
     
 }

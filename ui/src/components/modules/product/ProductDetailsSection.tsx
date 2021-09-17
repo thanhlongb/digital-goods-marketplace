@@ -1,7 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
-// TODO: parse makrdown
 type ProductDetailsSectionProps = {
     product: any
 }
@@ -25,8 +24,9 @@ const ProductDetailsSection = ({
                     </ReactMarkdown>
                     <p className="w-full space-y-2 font-medium text-white">
                         <span className="text-gray-900">Tags: </span>
-                        { tags.map((tag:string) => (
-                            <span className="inline-block mr-2 px-3 py-1 rounded-full bg-blue-500">
+                        { tags.map((tag:string, index: number) => (
+                            <span key={index}
+                             className="inline-block mr-2 px-3 py-1 rounded-full bg-blue-500">
                                 { tag }
                             </span>
                         ))}
