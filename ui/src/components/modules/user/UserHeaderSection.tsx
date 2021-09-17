@@ -30,7 +30,7 @@ export const UserHeaderSection : NextPage<UserHeaderSectionProps> = ({
           })
           .then((response:any) => {
               setAvatarUploading(false)
-              setUserAvatar(response.avatar ?? avatar)
+              setUserAvatar(response.data.avatar ?? avatar)
           })
           .catch(error => console.log(error));
         });
