@@ -29,5 +29,6 @@ Make sure it has these polices:
 3. Go to SES , add digitalmarketplace.sales@gmail.com as verified email ( Under Identity Management, go to Email Addresses and click verify a new email address)
 
 Note: for verification, access this email account
-Email: digitalmarketplace.sales@gmail.com
-Password: ZfdSFNPnEXgC2aH
+
+- Email: digitalmarketplace.sales@gmail.com
+- Password: ZfdSFNPnEXgC2aH
