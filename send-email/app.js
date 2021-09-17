@@ -6,7 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
 // Load the AWS SDK for Node.js
 const AWS = require("aws-sdk");
 // Set the region
@@ -144,7 +143,7 @@ BODY_HTML = `<!DOCTYPE html>
 // Text body template
 BODY_TEXT = "TEST";
 
-app.post("/", async (req, res) => {
+app.use("/sendEmail", async (req, res) => {
   // "From" address
   SENDER = "paulkevintornado@gmail.com";
 
@@ -189,5 +188,9 @@ app.post("/", async (req, res) => {
       console.error(err, err.stack);
     });
 });
+
+const port = process.env.PORT || 5000
+
+app.listen(port, () => console.log(`listening on port ${port}`))
 
 module.exports = app;
