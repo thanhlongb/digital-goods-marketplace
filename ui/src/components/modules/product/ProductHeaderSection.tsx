@@ -93,11 +93,8 @@ const ProductHeaderSection = ({
       <div className="lg:col-span-7 relative">
         <img 
           className="h-full max-h-96 w-full object-cover rounded-md shadow-md"
-          src={product.image_path}
+          src={product.image_path && product.image_path.length > 0 ? product.image_path : "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
           alt={product.name}
-          // loader={() => "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
-          // width="100%"
-          // height="400"
         />    
       </div>
       <div className="space-y-4 px-0 lg:col-span-5">

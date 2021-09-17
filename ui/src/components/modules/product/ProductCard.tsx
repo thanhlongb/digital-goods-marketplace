@@ -47,9 +47,8 @@ export const ProductCard = ({
           <a>
           <div className="flex-shrink-0 relative">
             <img className="h-56 w-full object-cover" 
-                    src={imageUrl ?? "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"} 
+                    src={(imageUrl && imageUrl.length  > 0) ? imageUrl : "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"} 
                     alt={name}
-                    // loader={() => "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
             ></img>
             <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900 group-hover:to-gray-800"></div>
             <div className="flex-1 absolute bottom-0 left-0 right-0 pb-4 px-4">
