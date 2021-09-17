@@ -70,7 +70,7 @@ const ProductReviewsSection = ({
             </div>
           </div>
 
-        { !isOwner ? (
+        { user !== null && !isOwner ? (
           <div className="bg-gray-50 px-4 py-6 sm:px-6">
             <div className="flex space-x-3">         
                 <div className="min-w-0 flex-1">
