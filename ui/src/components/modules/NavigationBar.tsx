@@ -80,10 +80,7 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
                         <div>
                           <Menu.Button className="flex text-sm rounded-full p-1 transition bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" 
-                                 src={(user.image ?? `https://ui-avatars.com/api/?name=${user.name}`)} 
-                                 alt={user.name ?? ''} />
-                            <span className="text-white px-4 my-auto font-semibold">{user.name}</span>
+                            <span className="text-white py-2 px-4 my-auto font-semibold">{user.name}</span>
                           </Menu.Button>
                         </div>
                         <Transition
@@ -168,11 +165,6 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
             { user ? (
                 <div className="py-3 border-t border-gray-700">
                     <div className="flex items-center pt-4">
-                        <div className="flex-shrink-0">
-                            <img className="h-10 w-10 rounded-full" 
-                                 src={(user.image ?? `https://ui-avatars.com/api/?name=${user.name}`)} 
-                                 alt={user.name ?? ''} />
-                        </div>
                         <div className="ml-3">
                             <div className="text-base font-medium text-white">{user.name}</div>
                             <div className="text-sm font-medium text-gray-400">{user.email}</div>

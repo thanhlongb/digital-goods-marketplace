@@ -51,11 +51,11 @@ const ProductReviewsSection = ({
   
     <div className="space-y-6 pt-4 lg:pt-0 lg:col-span-9">
         <div className="bg-white shadow sm:rounded-lg sm:overflow-hidden">
-          <div className="px-4 pt-5 sm:px-6">
-            <h2 id="applicant-information-title" className="text-lg leading-6 font-medium text-gray-900">
-                Reviews
-            </h2>
-          </div>           
+          <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
+              <h2 id="applicant-information-title" className="text-lg leading-6 font-medium text-gray-900">
+                  Reviews
+              </h2>
+          </div>         
           <div className="divide-y divide-gray-200">
             <div className="px-4 py-6 sm:px-6">
               { (reviews && reviews.length > 0) ? (
