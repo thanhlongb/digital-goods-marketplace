@@ -1,0 +1,9 @@
+version: "3.7"
+
+services: 
+  app: 
+    # build: . # TODO uncomment this on push to github
+    image: thanhlongb/digitalmarket
+    ports: 
+      - 3000:3000
+    working_dir: /usr/src/app
