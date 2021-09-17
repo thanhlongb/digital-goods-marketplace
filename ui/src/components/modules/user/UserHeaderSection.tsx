@@ -3,12 +3,7 @@ import { NextPage } from "next";
 import { uploadFile } from '../../../utils/fileUpload';
 import axios from 'axios';
 import { API_PRODUCT_CDN, API_USER_SERVICE } from '../../../utils/constants';
-/**
- * TODO: fix image hover bug where it only clickable
- *       when hovering on ourside circle of avatar
- * 
- * Reminder: only show bought products if viewing user is current user
- */
+
 interface UserHeaderSectionProps {
     avatar?: string,
     username: string,
@@ -35,7 +30,7 @@ export const UserHeaderSection : NextPage<UserHeaderSectionProps> = ({
           })
           .then((response:any) => {
               setAvatarUploading(false)
-              setUserAvatar(response.avatar ?? avatar)
+              setUserAvatar(response.data.avatar ?? avatar)
           })
           .catch(error => console.log(error));
         });

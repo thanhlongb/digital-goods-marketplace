@@ -26,9 +26,9 @@ const UserPage : NextPage<UserPageProps> = ({
                 <>
                     <UserHeaderSection 
                         avatar={user.avatar}
-                        username={user.name}
+                        username={user.id}
                         email={user.email}
-                        isCurrentUser={user.name == currentUser?.name} />
+                        isCurrentUser={user.id == currentUser?.name} />
                     <ProductsListSection 
                         title="Selling products"
                         products={sellingProducts}

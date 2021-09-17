@@ -47,14 +47,12 @@ export const ProductCard = ({
           <a>
           <div className="flex-shrink-0 relative">
             <img className="h-56 w-full object-cover" 
-                    src={imageUrl ?? "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"} 
+                    src={(imageUrl && imageUrl.length  > 0) ? imageUrl : "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"} 
                     alt={name}
-                    // loader={() => "https://painel.posestacio.com.br/assets/eventos/img/imagem-not-found.jpg"}
             ></img>
             <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900 group-hover:to-gray-800"></div>
             <div className="flex-1 absolute bottom-0 left-0 right-0 pb-4 px-4">
               <p className="text-sm font-medium text-white bg-blue-500 inline-block px-3 py-1 rounded-full">
-                {/* TODO: category path */}
                 <Link href={`/product?categories=${categoryId}`}>
                   <a className="hover:underline">
                     {category.name}
@@ -87,7 +85,6 @@ export const ProductCard = ({
                   </Link>
                 </p>
                 <div className="flex space-x-1 text-sm text-gray-300">
-                  {/* TODO: change dateTime value */}
                   <time dateTime="2020-03-16"> 
                     { DateTime.fromSeconds(date).toLocaleString(DateTime.DATE_MED) }
                   </time>

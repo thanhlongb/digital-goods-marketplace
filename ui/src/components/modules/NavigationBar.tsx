@@ -22,7 +22,6 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
   const router = useRouter();
   const [session, loading] = useSession();
   const user = (session ? session.user : null);
-  console.log(user)
   return (
 
 <Disclosure as="nav" className="bg-gray-900 py-6">

@@ -93,7 +93,6 @@ const ProductCreateSection = ({
   }, [])
 
     return (
-// TODO: Redirect to home if user not logged in
 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:py-16 lg:px-8">
 
     <div className="bg-white rounded-lg shadow overflow-hidden">

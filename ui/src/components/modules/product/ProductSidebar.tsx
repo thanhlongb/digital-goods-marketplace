@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { NextPage } from "next";
 import { ProductSectionContext } from "../../pages/ProductPage";
 
-// TODO: check for product ownership, considering allow edit in this page
 interface ProductSidebarProps {
     isOwner: boolean
 }
@@ -21,7 +20,6 @@ export const ProductSidebar : NextPage<ProductSidebarProps> = ({
 
     <aside className="order-first lg:order-last lg:py-0 lg:px-0 lg:col-span-3">
         <nav className="bg-gray-50 p-4 rounded-md shadow space-y-2" aria-label="Sidebar">
-            {/* TODO: fix this stupid code, later (or never :/) */}
             <button onClick={() => { setCurrentSection("details") }} 
                     className={classNames(
                       (currentSection == 'details') ? 'bg-indigo-400 text-white' : 'text-gray-600 hover:bg-gray-200 hover:text-gray-900',
