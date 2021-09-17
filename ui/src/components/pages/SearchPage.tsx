@@ -17,10 +17,6 @@ export const sortByOptions = [
     {
       "id": "ratings",
       "name": "Best rating"
-    },
-    {
-      "id": "views",
-      "name": "Most viewed"
     }
 ]
 
