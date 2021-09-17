@@ -7,16 +7,3 @@ services:
     ports: 
       - 3000:3000
     working_dir: /usr/src/app
-    depends_on:
-      - api 
-    environment: 
-      API_BASE_URL: api:3000
-
-  api:
-    image: williamyeh/json-server
-    ports: 
-      - 3002:3000
-    working_dir: /data
-    command: -w db.json
-    volumes:
-      - ./mock-api-data:/data

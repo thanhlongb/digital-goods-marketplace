@@ -22,6 +22,7 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
   const router = useRouter();
   const [session, loading] = useSession();
   const user = (session ? session.user : null);
+  console.log(user)
   return (
 
 <Disclosure as="nav" className="bg-gray-900 py-6">
@@ -79,10 +80,7 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
                         <div>
                           <Menu.Button className="flex text-sm rounded-full p-1 transition bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" 
-                                 src={(user.image ?? `https://ui-avatars.com/api/?name=${user.name}`)} 
-                                 alt={user.name ?? ''} />
-                            <span className="text-white px-4 my-auto font-semibold">{user.name}</span>
+                            <span className="text-white py-2 px-4 my-auto font-semibold">{user.name}</span>
                           </Menu.Button>
                         </div>
                         <Transition
@@ -136,15 +134,6 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
                 </div>
             ) : (
                 <div className="hidden md:flex md:items-center md:space-x-6">
-                {/* TODO: change callbackurl */}
-                {/* <button type="submit" 
-                        disabled={loading}
-                        onClick={() => signIn('cognito', {
-                          callbackUrl: `${window.location.origin}`
-                        })}
-                        className="mr-4 text-base font-medium text-white hover:text-gray-300">
-                    Log in
-                </button> */}
                 <button type="submit"
                         disabled={loading}
                         onClick={() => signIn('cognito', {
@@ -176,11 +165,6 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
             { user ? (
                 <div className="py-3 border-t border-gray-700">
                     <div className="flex items-center pt-4">
-                        <div className="flex-shrink-0">
-                            <img className="h-10 w-10 rounded-full" 
-                                 src={(user.image ?? `https://ui-avatars.com/api/?name=${user.name}`)} 
-                                 alt={user.name ?? ''} />
-                        </div>
                         <div className="ml-3">
                             <div className="text-base font-medium text-white">{user.name}</div>
                             <div className="text-sm font-medium text-gray-400">{user.email}</div>
@@ -207,10 +191,6 @@ export const NavigationBar: NextPage<NavigationBarProps> = ({
             ) : (
                 <div className="py-3 border-t border-gray-700">
                     <div className="space-y-2 lg:px-3">
-                        {/* <a href="#"
-                            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                            Sign up
-                        </a> */}
                         <button type="submit"
                                 disabled={loading}
                                 onClick={() => signIn('cognito', {

@@ -3,13 +3,14 @@ import { NextPage } from "next";
 import { DefaultLayout } from "../layouts/DefaultLayout";
 import { UserHeaderSection } from '../modules/user/UserHeaderSection';
 import { ProductsListSection } from "../modules/home/ProductsListSection";
-import { API_BASE_URL } from "../../utils/constants";
+import { API_PRODUCT_SERVICE, API_USER_SERVICE } from "../../utils/constants";
 import { Alert } from "../elements/Alert";
+import { useSession } from 'next-auth/client';
 
 interface UserPageProps {
     user?: any,
-    sellingProducts?: any,
-    boughtProducts?: any
+    sellingProducts: any[],
+    boughtProducts: any[]
 }
 
 const UserPage : NextPage<UserPageProps> = ({
@@ -17,14 +18,17 @@ const UserPage : NextPage<UserPageProps> = ({
     sellingProducts,
     boughtProducts
 }) => {
+    const [session, loading] = useSession();
+    const currentUser = (session ? session.user : null);    
     return (
         <DefaultLayout>
             { user ? (
                 <>
                     <UserHeaderSection 
-                        avatar={user.imageUrl}
+                        avatar={user.avatar}
                         username={user.name}
-                        email={user.email} />
+                        email={user.email}
+                        isCurrentUser={user.name == currentUser?.name} />
                     <ProductsListSection 
                         title="Selling products"
                         products={sellingProducts}
@@ -47,9 +51,18 @@ const UserPage : NextPage<UserPageProps> = ({
 
 UserPage.getInitialProps = async ({ query }) => {
     const { id } = query;
-    const user            = await (await fetch(`http://${API_BASE_URL}/getUser`)).json();
-    const sellingProducts = user ? (await (await fetch(`http://${API_BASE_URL}/getSellingProducts`)).json()) : [];
-    const boughtProducts  = user ? (await (await fetch(`http://${API_BASE_URL}/getBoughtProducts`)).json()) : [];
+    // TODO the awaits below is autistic, fix it
+    const user            = await fetch(`https://${API_USER_SERVICE}/v1/users/${id}`)
+        .then(response => response.json())
+        .catch(error => null);
+    const sellingProducts = user ? (
+        await fetch(`https://${API_PRODUCT_SERVICE}/products/selling?user=${id}`)
+            .then(response => response.json())
+        ) : [];
+    const boughtProducts = user ? (
+        await fetch(`https://${API_PRODUCT_SERVICE}/products/bought?user=${id}`)
+            .then(response => response.json())
+        ) : [];
     
     return {
       sellingProducts: sellingProducts,
