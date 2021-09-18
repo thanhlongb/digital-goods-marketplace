@@ -9,7 +9,8 @@ interface SearchSidebarProps {
     setPriceFrom: any,
     setPriceTo: any,
     addFilterCategory: any,
-    removeFilterCategory: any
+    removeFilterCategory: any,
+    setPageNumber: any
 }
 
 export const SearchSidebar = ({
@@ -17,7 +18,8 @@ export const SearchSidebar = ({
     setPriceFrom,
     setPriceTo,
     addFilterCategory,
-    removeFilterCategory
+    removeFilterCategory,
+    setPageNumber
 } : SearchSidebarProps) => {
     const [categories, setCategories] = useState(Array());    
     const fetchCategories = async () => {
@@ -37,12 +39,14 @@ export const SearchSidebar = ({
                 addFilterCategory={addFilterCategory}
                 removeFilterCategory={removeFilterCategory} 
                 triggerSearch={triggerSearch}
+                setPageNumber={setPageNumber}
             />
             {/* <CheckboxFilter /> */}
             <PriceRangeFilter 
                 triggerSearch={triggerSearch} 
                 setPriceFrom={setPriceFrom}
                 setPriceTo={setPriceTo}
+                setPageNumber={setPageNumber}
             />
         </aside>
         

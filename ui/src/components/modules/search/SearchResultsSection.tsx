@@ -66,7 +66,7 @@ export const SearchResultsSection = ({
             </label>
             <select id="sort" 
                     name="sort"
-                    onChange={e => {setOrderBy(e.target.value); triggerSearch()}}
+                    onChange={e => {setOrderBy(e.target.value); setPageNumber(1); triggerSearch()}}
                     value={searchContext.orderBy}
                     className="block text-gray-800 font-bold w-auto pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
               { sortByOptions.map((option) => 
