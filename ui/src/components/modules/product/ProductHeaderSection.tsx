@@ -50,7 +50,7 @@ const ProductHeaderSection = ({
   }
 
   useEffect(() => {
-    if (user && purchase === null) fetchPurchase();
+    if (user && !isOwner && purchase === null) fetchPurchase();
   }, [user])
   useEffect(() => {
     fetchCategory(product.category);
