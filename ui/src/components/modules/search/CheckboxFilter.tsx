@@ -8,15 +8,13 @@ interface CheckboxFilterProps {
   addFilterCategory: any,
   removeFilterCategory: any,
   triggerSearch: any,
-  setPageNumber: any
 }
 
 export const CheckboxFilter : NextPage<CheckboxFilterProps> = ({
   options,
   addFilterCategory,
   removeFilterCategory,
-  triggerSearch,
-  setPageNumber
+  triggerSearch
 }) => {
     const { filterCategories } = useContext(SearchSectionContext);
     return (
@@ -50,7 +48,6 @@ export const CheckboxFilter : NextPage<CheckboxFilterProps> = ({
                           onChange={(e) => {
                             (e.target.checked) ? addFilterCategory(option.id) : removeFilterCategory(option.id);
                             triggerSearch();
-                            setPageNumber(1);
                           }}
                       />
                   </div>

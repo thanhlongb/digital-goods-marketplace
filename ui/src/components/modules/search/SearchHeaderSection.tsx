@@ -3,14 +3,12 @@ import { SearchSectionContext } from '../../pages/SearchPage';
 
 interface SearchHeaderSectionProps {
   setSearchQuery: Dispatch<SetStateAction<string>>,
-  setIsSearching: Dispatch<SetStateAction<boolean>>,
-  setPageNumber: any
+  setIsSearching: Dispatch<SetStateAction<boolean>>
 }
 
 export const SearchHeaderSection = ({
   setSearchQuery,
-  setIsSearching,
-  setPageNumber
+  setIsSearching
 } : SearchHeaderSectionProps) => {
     const searchContext = useContext(SearchSectionContext);
     return (
@@ -50,7 +48,7 @@ export const SearchHeaderSection = ({
                     <button 
                       type="submit"
                       disabled={ searchContext.isSearching }
-                      onClick={() => {setPageNumber(1); setIsSearching(true)}}
+                      onClick={() => {setIsSearching(true)}}
                       className="block w-full py-3 px-4 rounded-md shadow bg-indigo-500 text-white font-medium hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900">
                       Search</button>
                   </div>
