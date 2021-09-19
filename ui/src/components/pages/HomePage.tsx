@@ -28,6 +28,7 @@ const HomePage: NextPage<HomePageProps> = ({
           categories={categories} />
         <ProductsListSection 
           title="Recently added products"
+          subtitle="See some latest masterpieces from our contributors here."
           products={recentProducts}
           showViewMore={true} />
         <CallToActionSection />
