@@ -81,16 +81,14 @@ const SearchPage : NextPage<SearchPageProps> = ({
             <SearchSectionContext.Provider value={contextValues}>
                 <SearchHeaderSection 
                     setSearchQuery={setSearchQuery}
-                    setIsSearching={setIsSearching}
-                    setPageNumber={setPageNumber} />
+                    setIsSearching={setIsSearching} />
                 <div className="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-5">
                     <SearchSidebar 
                         triggerSearch={triggerSearch}  
                         setPriceFrom={setPriceFrom}
                         setPriceTo={setPriceTo} 
                         addFilterCategory={addFilterCategory}
-                        removeFilterCategory={removeFilterCategory}
-                        setPageNumber={setPageNumber} />
+                        removeFilterCategory={removeFilterCategory} />
                     <SearchResultsSection
                         triggerSearch={triggerSearch} 
                         setIsSearching={setIsSearching}
