@@ -7,7 +7,7 @@ interface CheckboxFilterProps {
   options: any[],
   addFilterCategory: any,
   removeFilterCategory: any,
-  triggerSearch: () => {};
+  triggerSearch: any,
 }
 
 export const CheckboxFilter : NextPage<CheckboxFilterProps> = ({

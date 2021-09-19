@@ -16,7 +16,8 @@ export const CategoriesSection : NextPage<CategoriesSectionProps> = ({
               <h2 className="text-4xl font-extrabold tracking-tight text-center text-gray-900 sm:text-4xl">
                 <span className="block">Categories of digital goods</span>
               </h2>
-              <p className="text-xl text-gray-700 text-center">Ornare sagittis, suspendisse in hendrerit quis. Sed dui aliquet lectus sit pretium egestas vel mattis neque.</p>
+              <p className="text-xl text-gray-700 text-center">
+              Don’t know how to start? Take a look at our showcase category and pick your most favorite.</p>
             </div>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 pt-8">
                 {categories.map((category) => (

@@ -31,11 +31,16 @@ const UserPage : NextPage<UserPageProps> = ({
                         isCurrentUser={user.id == currentUser?.name} />
                     <ProductsListSection 
                         title="Selling products"
+                        subtitle={
+                            (user.id == currentUser?.name) 
+                            ? "Click to see who’s requesting your product and confirm after receiving the money" 
+                            : "Click into the picture to see more details and request to buy that product."}
                         products={sellingProducts}
                         noProductMessage="This user is not offering any product." />
                     <hr />
                     <ProductsListSection 
                         title="Bought products"
+                        subtitle="Products that this user purchased goes under here."
                         products={boughtProducts}
                         noProductMessage="You haven't purchased any product." />
                 </>

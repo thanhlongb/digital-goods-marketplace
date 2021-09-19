@@ -27,11 +27,9 @@ export const ProductsListSection = ({
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
               {title}
             </h2>
-            { (subtitle) ?? (
-              <p className="text-xl text-gray-700">
-                Ornare sagittis, suspendisse in hendrerit quis. Sed dui aliquet lectus sit pretium egestas vel mattis neque.
-              </p>
-            ) }
+            <p className="text-xl text-gray-700">
+            { (subtitle) ?? "Ornare sagittis, suspendisse in hendrerit quis. Sed dui aliquet lectus sit pretium egestas vel mattis neque." }
+            </p>
           </div>
     
           { (products.length > 0) ? (

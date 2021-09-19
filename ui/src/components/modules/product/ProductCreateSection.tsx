@@ -105,7 +105,7 @@ const ProductCreateSection = ({
                 Basic information
               </h1>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Please give your customer some basic information about your masterpiece. 
               </p>
             </div>
             <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
@@ -224,7 +224,7 @@ const ProductCreateSection = ({
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">Upload files</h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Please take a look at the size limit. Contact us if you want to publish in a bigger size.
               </p>
             </div>
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">

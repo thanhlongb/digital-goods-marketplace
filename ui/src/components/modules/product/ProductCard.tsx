@@ -76,7 +76,7 @@ export const ProductCard = ({
                 </a>
                 </Link>
               </div>
-              <div className="flex-1 ml-3">
+              <div className="flex-1 overflow-hidden mr-2 ml-3">
                 <p className="text-sm font-medium text-white">
                   <Link href={`/user/${sellerId}`}>
                   <a className="hover:underline">

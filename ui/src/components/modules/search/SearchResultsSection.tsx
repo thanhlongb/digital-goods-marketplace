@@ -41,14 +41,14 @@ export const SearchResultsSection = ({
     fetch(`https://${API_PRODUCT_SERVICE}/products/search?${queryParams.toString()}`)
       .then(response => response.json())
       .then(response => {
-        setProducts(response.products); 
+        setProducts(response.products)
         setProductsCount(response.totalResults)
       });
   }
   
   useEffect(() => {
     if (searchContext.isSearching == true) {
-      fetchProducts();
+      Promise.resolve(fetchProducts());
       setIsSearching(false);
     }
   }, [searchContext.isSearching])

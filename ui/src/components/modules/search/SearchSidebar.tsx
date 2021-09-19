@@ -9,7 +9,7 @@ interface SearchSidebarProps {
     setPriceFrom: any,
     setPriceTo: any,
     addFilterCategory: any,
-    removeFilterCategory: any
+    removeFilterCategory: any,
 }
 
 export const SearchSidebar = ({
@@ -17,7 +17,7 @@ export const SearchSidebar = ({
     setPriceFrom,
     setPriceTo,
     addFilterCategory,
-    removeFilterCategory
+    removeFilterCategory,
 } : SearchSidebarProps) => {
     const [categories, setCategories] = useState(Array());    
     const fetchCategories = async () => {

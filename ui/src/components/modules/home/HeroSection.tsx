@@ -27,8 +27,8 @@ export const HeroSection: NextPage<any> = () => {
                     <span className="block text-indigo-400">digital goods</span>
                   </h1>
                   <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui Lorem cupidatat
-                    commodo. Elit sunt amet fugiat veniam occaecat fugiat.
+                  Can’t find a powerpoint template for your next presentation? <br />
+                  Need a sample website for your web assignment? <br /> You can find it right away from our website with high quality ensured! 
                   </p>
                   <div className="mt-10 sm:mt-12">
                     <form action="#" className="sm:max-w-xl sm:mx-auto lg:mx-0">
@@ -53,10 +53,10 @@ export const HeroSection: NextPage<any> = () => {
                           </button>
                         </div>
                       </div>
-                      <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium 
+                      <p className="mt-3 text-sm italic text-gray-300 sm:mt-4">
+                      Please note that our marketplace will only connect buyers and sellers. The payment process will be decided offsite. Please check out our 
                         <a href="#"
-                          className="font-medium text-white"> totam rem aperiam</a>.</p>
+                          className="font-medium text-white"> Terms and Conditions</a>.</p>
                     </form>
                   </div>
                 </div>

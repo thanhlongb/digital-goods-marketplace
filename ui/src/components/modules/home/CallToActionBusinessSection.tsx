@@ -20,7 +20,8 @@ export const CallToActionBusinessSection : NextPage<any> = () => {
               Start your online business with us.
             </p>
             <p className="mt-3 text-lg text-gray-300">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat quisque ut interdum tincidunt duis.
+            Want to share your masterpieces to the community? <br /> 
+            Just a few steps to publish your product. No additional fee required!
             </p>
             <div className="mt-8">
               <div className="inline-flex rounded-md shadow">

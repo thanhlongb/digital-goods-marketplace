@@ -9,7 +9,4 @@ EXPOSE 3000
 # install dependencies
 RUN npm i
 
-# build the app
-RUN npm run build
-
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "buildThenStart"]

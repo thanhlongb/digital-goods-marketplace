@@ -3,15 +3,15 @@ import { NextPage } from "next";
 import { ChevronDownIcon } from '@heroicons/react/outline'
 
 interface PriceRangeFilterProps {
-  triggerSearch: () => {};
-  setPriceFrom: (price: any) => {};
-  setPriceTo: (price: any) => {};
+  triggerSearch: () => {}
+  setPriceFrom: (price: any) => {}
+  setPriceTo: (price: any) => {}
 }
 
 export const PriceRangeFilter : NextPage<PriceRangeFilterProps> = ({
   triggerSearch,
   setPriceFrom,
-  setPriceTo
+  setPriceTo,
 }) => {
     return (
 
@@ -59,7 +59,7 @@ export const PriceRangeFilter : NextPage<PriceRangeFilterProps> = ({
               <button 
                 type="submit"
                 className="block w-full py-3 px-4 rounded-md shadow bg-indigo-500 text-white font-medium hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
-                onClick={() => triggerSearch()}>
+                onClick={() => { triggerSearch()}}>
                 Set range</button>
             </div>
 
